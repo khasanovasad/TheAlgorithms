@@ -13,6 +13,10 @@
 #include <stdarg.h>
 #include <limits.h>
 
+/**
+ * Structure to represent a node in the list. All member variables are private.
+ * Only SLinkedList class has access to them through friendship.
+ **/
 template <typename T>
 struct SNode {
     private:
@@ -23,28 +27,122 @@ struct SNode {
         friend class SLinkedList;
 };
 
+/**
+ * Templated class to work as a singly linked list.
+ **/
 template <typename T>
 class SLinkedList {
     private:
+        /* Pointer to the first element in the list  */
         SNode<T> *head;      
 
+        /**
+         * Function to create a new node by allocating memory on the heap.
+         * @param element generic variable as a value of the node
+         * @return pointer to the newly created node if mem. alloc. was
+         * successfull, otherwise NULL
+         **/
         SNode<T>* CreateNode(T element);
     public:
+        /**
+         * Overloaded constructor that takes arbitrary number of arguments and
+         * intializes the list with them.
+         * @param arg_count the number of arguments that is being passed after
+         * arg_count
+         * @param ... arg_count number of arguments to initialize the list with
+         **/
         SLinkedList(int arg_count, ...);
+
+        /**
+         * Overloaded copy constructor.
+         * @param slist constant pointer to SLinkedList object to copy from
+         **/
+        SLinkedList(const SLinkedList *slist);
+
+        /**
+         * Overloaded constructor that serves as default.
+         **/
+        SLinkedList();
+
+        /**
+         * Destructor to free the memory.
+         **/
         ~SLinkedList();
 
+        /**
+         * Function that adds an element to the end of the list.
+         * @param element element to be added.
+         * @return ture on success
+         *         false on failure
+         **/
         bool InsertBack(T element);
+
+        /**
+         * Function that adds an element to the beginning of the list.
+         * @param element element to be added
+         * @return true on success
+         *         false in fauilure
+         **/
         bool InsertFront(T element);
+
+        /**
+         * Function that adds an element at the given position. 
+         * @param element element to be addded
+         * @param index index the position of the new element
+         * @return true on success
+         *         false on failure 
+         **/
         bool InsertAt(T element, int index);
 
+        /**
+         * Function that returns the last element in the list.
+         * @return queried element
+         **/
         T ElementBack() const;
+
+        /**
+         * Function that returns the first element in the list.
+         * @return queried element
+         **/
         T ElementFront() const;
+
+        /**
+         * Function that returns the element at the specific position from the
+         * list.
+         * @param index position of the desired element
+         * @return queried element
+         **/
         T ElementAt(int index) const;
 
+        /**
+         * Function that removes the last element in the list and frees it's
+         * memory.
+         * @return true on success
+         *         false on failure
+         **/
         bool RemoveBack();
+
+        /**
+         * Function that removes the first element in the list and frees it's
+         * memeory.
+         * @return true on success
+         *         false on failure
+         **/
         bool RemoveFront();
+
+        /**
+         * Function that removes an element at the specified position and frees
+         * it's memory.
+         * @param index position of the about to be deleted element
+         * @return true on success
+         *         false on failure
+         **/
         bool RemoveAt(int index);
 
+        /**
+         * Function that gives the number of elements in the list.
+         * @return number of elements in the list
+         **/
         size_t Size() const;
 };
 
@@ -65,6 +163,17 @@ SLinkedList<T>::SLinkedList(int arg_count, ...) {
     }
     va_end(ap);
 }
+
+template <typename T>
+SLinkedList<T>::SLinkedList(const SLinkedList *slist) {
+
+}
+
+template <typename T>
+SLinkedList<T>::SLinkedList() {
+
+}
+
 
 template <typename T>
 SLinkedList<T>::~SLinkedList() {
