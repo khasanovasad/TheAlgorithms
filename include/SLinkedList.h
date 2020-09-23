@@ -9,7 +9,6 @@
 #ifndef S_LINKED_LIST_H
 #define S_LINKED_LIST_H
 
-#include <cstdio>
 #include <cstdarg>
 #include <stdexcept>
 
@@ -173,7 +172,9 @@ SLinkedList<T>::SLinkedList(int arg_count, ...) {
 
 template <typename T>
 SLinkedList<T>::SLinkedList(const SLinkedList *slist) {
-
+    for (int i = 0; i < slist->Size(); ++i) {
+        InsertBack(slist->ElementAt(i));
+    }
 }
 
 template <typename T>
@@ -183,13 +184,7 @@ SLinkedList<T>::SLinkedList() {
 
 template <typename T>
 SLinkedList<T>::~SLinkedList() {
-    SNode<T> *tmp;
-    while (this->head != NULL) {
-        tmp = this->head;
-        this->head = this->head->next;
-        delete tmp;
-    }
-    this->head = NULL; // indicates an empty list
+    Erase();
 }
 
 template <typename T>
@@ -359,7 +354,13 @@ bool SLinkedList<T>::RemoveAt(int index) {
 
 template <typename T>
 bool SLinkedList<T>::Erase() {
-    return false;
+    SNode<T> *tmp;
+    while (this->head != NULL) {
+        tmp = this->head;
+        this->head = this->head->next;
+        delete tmp;
+    }
+    return true;
 }
 
 template <typename T>

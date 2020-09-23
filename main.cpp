@@ -1,17 +1,11 @@
-#include <cstdio>
 #include <string>
 #include <iostream>
 
 #include "SLinkedList.h"
 
-void Print(const SLinkedList<int> *slist) {
-   for (int i = 0; i < slist->Size(); ++i)
-      printf("%d ", slist->ElementAt(i)); 
-   printf("\n");
-} 
-
 int main() {
     // Testing out SLinkedList
+    /*
     do {
         SLinkedList<int> *list = new SLinkedList<int>();
         Print(list);
@@ -21,8 +15,11 @@ int main() {
         for (int i = 9; i > -1; --i)
             list->InsertFront(i);
         Print(list);
+        list->Erase();
+        Print(list);
         delete list;
-    } while (true);
+    } while (false);
+    */
     /*
     do {
         SLinkedList<int> *list = new SLinkedList<int>(1, 0);
@@ -48,7 +45,21 @@ int main() {
         delete slist;
     } while (false);
     */
-
-    // printf("Hello, World!\n");
+    do {
+        SLinkedList<std::string> *slist1 = new SLinkedList<std::string>();
+        slist1->InsertBack("zero");
+        slist1->InsertBack("one");
+        slist1->InsertBack("two");
+        slist1->InsertBack("three");
+        slist1->InsertBack("four");
+        slist1->InsertBack("five");
+        SLinkedList<std::string> *slist2 = new SLinkedList<std::string>(slist1);
+        for (int i = 0; i < slist2->Size(); ++i) {
+            std::cout << slist2->ElementAt(i) << " ";
+        }
+        std::cout << std::endl;
+        delete slist1;
+        delete slist2;
+    } while (true);
     return 0;
 }
