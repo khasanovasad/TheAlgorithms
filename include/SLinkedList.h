@@ -2,7 +2,7 @@
  * @file    SLinkedList.h
  * @author  Asadbek Khasanov
  * @date    September 22, 2020
- * @brief   File contining the implementation of generic Singly Linked List
+ * @brief   File containing the implementation of generic Singly Linked List
  *          data structure.
  **/
 
@@ -39,13 +39,13 @@ class SLinkedList {
          * Function to create a new node by allocating memory on the heap.
          * @param element generic variable as a value of the node
          * @return pointer to the newly created node if mem. alloc. was
-         * successfull, otherwise NULL
+         * successful, otherwise NULL
          **/
         SNode<T>* CreateNode(T element);
     public:
         /**
          * Overloaded constructor that takes arbitrary number of arguments and
-         * intializes the list with them.
+         * initializes the list with them.
          * @param arg_count the number of arguments that is being passed after
          * arg_count
          * @param ... arg_count number of arguments to initialize the list with
@@ -80,13 +80,13 @@ class SLinkedList {
          * Function that adds an element to the beginning of the list.
          * @param element element to be added
          * @return true on success
-         *         false in fauilure
+         *         false in failure
          **/
         bool InsertFront(T element);
 
         /**
          * Function that adds an element at the given position. 
-         * @param element element to be addded
+         * @param element element to be added
          * @param index index the position of the new element
          * @return true on success
          *         false on failure 
@@ -123,7 +123,7 @@ class SLinkedList {
 
         /**
          * Function that removes the first element in the list and frees it's
-         * memeory.
+         * memory.
          * @return true on success
          *         false on failure
          **/
