@@ -9,8 +9,8 @@
 #ifndef D_LINKED_LIST
 #define D_LINKED_LIST
 
-#include <cstdarg>
 #include <stdexcept>
+#include <initializer_list>
 
 template <typename T>
 struct DNode {
@@ -28,6 +28,12 @@ class DLinkedList {
 private:
     DNode<T> *head;
     DNode<T> *trailer;
+
+    /**
+     * Function that sets the head and the trailer of the list up. It's
+     * basically called at the beginning the each overloaded constructors.
+     */
+    void Init();
 
     /**
      * Function to create a node on the heap.
@@ -49,7 +55,7 @@ public:
      * @param arg_count number of argument that is being passed after arg_count
      * @param ... arg_count number of elements to initialize the list
      */
-    explicit DLinkedList(int arg_count, ...);
+    DLinkedList(std::initializer_list<T> i_list);
 
     /**
      * Overloaded constructor that is used to initialize the list by copying the
@@ -158,19 +164,19 @@ public:
 
 template <typename T>
 DLinkedList<T>::DLinkedList() {
-   head = new DNode<T>();
-   trailer = new DNode<T>();
-   head->next = trailer;
-   trailer->prev = head;
+    Init();
 }
 
 template <typename T>
-DLinkedList<T>::DLinkedList(int arg_count, ...) {
-
+DLinkedList<T>::DLinkedList(std::initializer_list<T> i_list) {
+    Init();
+    for (T elem : i_list)
+        InsertBack(elem);
 }
 
 template <typename T>
 DLinkedList<T>::DLinkedList(const DLinkedList *d_list) {
+    Init();
     for (int i = 0; i < d_list->Size(); ++i)
         InsertBack(d_list->ElementBack(i));
 }
@@ -180,6 +186,14 @@ DLinkedList<T>::~DLinkedList() {
    Erase();
    delete head;
    delete trailer;
+}
+
+template <typename T>
+void DLinkedList<T>::Init() {
+    head = new DNode<T>();
+    trailer = new DNode<T>();
+    head->next = trailer;
+    trailer->prev = head;
 }
 
 template <typename T>
