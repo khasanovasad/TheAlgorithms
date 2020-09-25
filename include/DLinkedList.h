@@ -68,7 +68,7 @@ public:
      * @return true if there is no element in the list
      *         false otherwise
      */
-    bool IsEmpty();
+    bool IsEmpty() const;
 
     /**
      * Inserts a new element at the beginning of the list.
@@ -89,11 +89,34 @@ public:
     /**
      * Inserts a new element at the specified position of the list.
      * @param element value of the new element
-     * @param pos position of the new node
+     * @param index position of the new node
      * @return true on success
      *         false on failure
      */
-    bool InsertAt(T element, int pos);
+    bool InsertAt(T element, int index);
+
+    /**
+     * Function to get the value of the first element in the list.
+     * Throws an exception if the list is empty.
+     * @return value the first element in the list
+     */
+    T ElementFront() const;
+
+    /**
+     * Function to get the value of the last element in the list.
+     * Throws an exception if the list is empty.
+     * @return value the last element in the list
+     */
+    T ElementBack() const;
+
+    /**
+     * Function to get the value of the element at specified position
+     * in the list. Throws an exception if the index is out of the range or
+     * the list is empty.
+     * @param index position of the required element
+     * @return value of the element at specified position
+     */
+    T ElementAt(int index) const;
 
     /**
      * Function to remove the first element in the list and deallocating
@@ -114,11 +137,11 @@ public:
     /**
      * Function to remove the element at specified index and deallocating
      * it's memory.
-     * @param pos index of the element to  delete
+     * @param index index of the element to  delete
      * @return true on success
      *         false on failure
      */
-    bool RemoveAt(int pos);
+    bool RemoveAt(int index);
 
     /**
      * Function to clear the entire list making it empty. It also deallocates
@@ -130,7 +153,7 @@ public:
      * Function to count the total number of elements in the list.
      * @return size of the list
      */
-    size_t Count();
+    size_t Count() const;
 };
 
 template <typename T>
@@ -154,8 +177,7 @@ DLinkedList<T>::DLinkedList(const DLinkedList *d_list) {
 
 template <typename T>
 DLinkedList<T>::~DLinkedList() {
-   while (!IsEmpty())
-       RemoveFront();
+   Erase();
    delete head;
    delete trailer;
 }
@@ -167,54 +189,186 @@ DNode<T>* DLinkedList<T>::CreateNode(T element) {
         return nullptr;
 
     new_node->element = element;
-    new_node->head = nullptr;
-    new_node->trailer = nullptr;
+    new_node->next = nullptr;
+    new_node->prev = nullptr;
     return new_node;
 }
 
 template <typename T>
-bool DLinkedList<T>::IsEmpty() {
-    if (head->next == trailer) return true;
+bool DLinkedList<T>::IsEmpty() const {
+    if (head->next == trailer && trailer->prev == head) return true;
     else return false;
 }
 
 template <typename T>
 bool DLinkedList<T>::InsertFront(T element) {
+    DNode<T> *new_node = CreateNode(element);
+    if (new_node != nullptr) { // mem allocation was successful
+        if (IsEmpty()) {
+            head->next = new_node;
+            new_node->prev = head;
+            trailer->prev = new_node;
+            new_node->next = trailer;
+        }
+        else {
+            new_node->prev = head;
+            new_node->next = head->next;
+            head->next->prev = new_node;
+            head->next = new_node;
+        }
+        return true;
+    }
     return false;
 }
 
 template <typename T>
 bool DLinkedList<T>::InsertBack(T element) {
+    DNode<T> *new_node = CreateNode(element);
+    if (new_node != nullptr) { // mem allocation was successful
+        if (IsEmpty()) {
+            head->next = new_node;
+            new_node->prev = head;
+            trailer->prev = new_node;
+            new_node->next = trailer;
+        }
+        else {
+            new_node->next = trailer;
+            new_node->prev = trailer->prev;
+            trailer->prev->next = new_node;
+            trailer->prev = new_node;
+        }
+        return true;
+    }
     return false;
 }
 
 template <typename T>
-bool DLinkedList<T>::InsertAt(T element, int pos) {
-    return false;
+bool DLinkedList<T>::InsertAt(T element, int index) {
+    size_t size = Count();
+    if (index >= size || index < 0) {
+        throw std::out_of_range("Index Out Of Range");
+    }
+    else {
+        if (index == 0)
+            return InsertFront(element);
+        else if (index == size - 1)
+            return InsertBack(element);
+        else {
+            DNode<T> *new_node = CreateNode(element);
+            if (new_node != nullptr) {
+                DNode<T> *tmp = head->next;
+                for (int i = 0; i < index; ++i) {
+                    tmp = tmp->next;
+                }
+                new_node->next = tmp;
+                new_node->prev = tmp->prev;
+                tmp->prev->next = new_node;
+                tmp->prev = new_node;
+            }
+        }
+    }
+}
+
+template <typename T>
+T DLinkedList<T>::ElementFront() const {
+    return head->next->element;
+}
+
+template <typename T>
+T DLinkedList<T>::ElementBack() const {
+    return trailer->prev->element;
+}
+
+template <typename T>
+T DLinkedList<T>::ElementAt(int index) const {
+    size_t size = Count();
+    if (index >= size || index < 0) {
+        throw std::out_of_range("Index Out Of Range");
+    }
+    else {
+        if (index == 0)
+            return ElementFront();
+        else if (index == size - 1)
+            return ElementBack();
+        else {
+            DNode<T> *tmp = head->next;
+            for (int i = 0; i < index; ++i) {
+                tmp = tmp->next;
+            }
+            return tmp->element;
+        }
+    }
 }
 
 template <typename T>
 bool DLinkedList<T>::RemoveFront() {
-    return false;
+    if (!IsEmpty()) {
+        DNode<T> *tmp = head->next;
+        head->next = head->next->next;
+        delete tmp;
+        return true;
+    }
+    else
+        return false;
 }
 
 template <typename T>
 bool DLinkedList<T>::RemoveBack() {
-    return false;
+    if (!IsEmpty()) {
+        DNode<T> *tmp = trailer->prev;
+        trailer->prev = trailer->prev->prev;
+        trailer->prev->next = trailer;
+        delete tmp;
+        return true;
+    }
+    else
+        return false;
 }
 
 template <typename T>
-bool DLinkedList<T>::RemoveAt(int pos) {
-    return false;
+bool DLinkedList<T>::RemoveAt(int index) {
+    size_t size = Count();
+    if (index >= size || index < 0) {
+        throw std::out_of_range("Index Out Of Range");
+    }
+    else {
+        if (index == 0)
+            return RemoveFront();
+        else if (index == size - 1)
+            return RemoveBack();
+        else {
+            DNode<T> *tmp = head->next;
+            for (int i = 0; i < index; ++i) {
+                tmp = tmp->next;
+            }
+            tmp->prev->next = tmp->next;
+            tmp->next->prev = tmp->prev;
+            delete tmp;
+            return true;
+        }
+    }
 }
 
 template <typename T>
 void DLinkedList<T>::Erase() {
-
+    DNode<T> *tmp;
+    while (head->next != trailer) {
+        tmp = head->next;
+        head->next = tmp->next;
+        delete tmp;
+    }
+    trailer->prev = head;
 }
 
 template <typename T>
-size_t DLinkedList<T>::Count() {
-    return 0;
+size_t DLinkedList<T>::Count() const {
+    size_t size = 0;
+    DNode<T> *tmp = head->next;
+    while (tmp != trailer) {
+        tmp = tmp->next;
+        ++size;
+    }
+    return size;
 }
+
 #endif // D_LINKED_LIST
