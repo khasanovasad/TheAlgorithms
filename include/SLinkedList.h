@@ -50,13 +50,13 @@ class SLinkedList {
          * arg_count
          * @param ... arg_count number of arguments to initialize the list with
          **/
-        SLinkedList(int arg_count, ...);
+        explicit SLinkedList(int arg_count, ...);
 
         /**
          * Overloaded copy constructor.
-         * @param slist constant pointer to SLinkedList object to copy from
+         * @param s_list constant pointer to SLinkedList object to copy from
          **/
-        SLinkedList(const SLinkedList *slist);
+        SLinkedList(const SLinkedList *s_list);
 
         /**
          * Overloaded constructor that serves as default.
@@ -171,9 +171,9 @@ SLinkedList<T>::SLinkedList(int arg_count, ...) {
 }
 
 template <typename T>
-SLinkedList<T>::SLinkedList(const SLinkedList *slist) {
-    for (int i = 0; i < slist->Size(); ++i) {
-        InsertBack(slist->ElementAt(i));
+SLinkedList<T>::SLinkedList(const SLinkedList *s_list) {
+    for (int i = 0; i < s_list->Size(); ++i) {
+        InsertBack(s_list->ElementAt(i));
     }
 }
 
@@ -189,7 +189,7 @@ SLinkedList<T>::~SLinkedList() {
 
 template <typename T>
 SNode<T>* SLinkedList<T>::CreateNode(T element) {
-    SNode<T> *new_node = new SNode<T>();
+    auto *new_node = new SNode<T>();
     if (new_node == NULL) {
         return NULL;
     }
