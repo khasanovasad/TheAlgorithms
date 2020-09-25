@@ -9,8 +9,8 @@
 #ifndef S_LINKED_LIST_H
 #define S_LINKED_LIST_H
 
-#include <cstdarg>
 #include <stdexcept>
+#include <initializer_list>
 
 /**
  * Structure to represent a node in the list. All member variables are private.
@@ -50,7 +50,7 @@ class SLinkedList {
          * arg_count
          * @param ... arg_count number of arguments to initialize the list with
          **/
-        explicit SLinkedList(int arg_count, ...);
+        SLinkedList(std::initializer_list<T> i_list);
 
         /**
          * Overloaded copy constructor.
@@ -153,25 +153,16 @@ class SLinkedList {
 };
 
 template <typename T>
-SLinkedList<T>::SLinkedList(int arg_count, ...) {
-    T tmp;
-    va_list ap;
-    va_start(ap, arg_count);
-
-    tmp = va_arg(ap, T);
-    SNode<T> *new_node = CreateNode(tmp);
-    if (new_node != NULL)
-        this->head = new_node;
-
-    for (int i = 1; i < arg_count; ++i) {
-        tmp = va_arg(ap, T);
-        InsertBack(tmp);
+SLinkedList<T>::SLinkedList(std::initializer_list<T> i_list) {
+    this->head = NULL;
+    for (T elem : i_list) {
+        InsertBack(elem);
     }
-    va_end(ap);
 }
 
 template <typename T>
 SLinkedList<T>::SLinkedList(const SLinkedList *s_list) {
+    this->head= NULL;
     for (int i = 0; i < s_list->Size(); ++i) {
         InsertBack(s_list->ElementAt(i));
     }
