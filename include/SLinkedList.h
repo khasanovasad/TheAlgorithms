@@ -56,7 +56,7 @@ class SLinkedList {
          * Overloaded copy constructor.
          * @param s_list constant pointer to SLinkedList object to copy from
          **/
-        SLinkedList(const SLinkedList *s_list);
+        SLinkedList(const SLinkedList &s_list);
 
         /**
          * Overloaded constructor that serves as default.
@@ -161,7 +161,7 @@ SLinkedList<T>::SLinkedList(std::initializer_list<T> i_list) {
 }
 
 template <typename T>
-SLinkedList<T>::SLinkedList(const SLinkedList *s_list) {
+SLinkedList<T>::SLinkedList(const SLinkedList &s_list) {
     this->head= NULL;
     for (int i = 0; i < s_list->Size(); ++i) {
         InsertBack(s_list->ElementAt(i));

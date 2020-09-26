@@ -62,7 +62,7 @@ public:
      * elements of another list passed as a parameter.
      * @param d_list pre-existing list to copy from
      */
-    DLinkedList(const DLinkedList *d_list);
+    DLinkedList(const DLinkedList &d_list);
 
     /**
      * Destructor to free the memory.
@@ -175,10 +175,10 @@ DLinkedList<T>::DLinkedList(std::initializer_list<T> i_list) {
 }
 
 template <typename T>
-DLinkedList<T>::DLinkedList(const DLinkedList *d_list) {
+DLinkedList<T>::DLinkedList(const DLinkedList &d_list) {
     Init();
-    for (int i = 0; i < d_list->Size(); ++i)
-        InsertBack(d_list->ElementBack(i));
+    for (int i = 0; i < d_list.Count(); ++i)
+        InsertBack(d_list.ElementAt(i));
 }
 
 template <typename T>
