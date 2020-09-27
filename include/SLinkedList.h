@@ -37,6 +37,7 @@ class SLinkedList {
 
         /**
          * Function to create a new node by allocating memory on the heap.
+         * Throws std::bad_alloc if unable to allocate memory.
          * @param element generic variable as a value of the node
          * @return pointer to the newly created node if mem. alloc. was
          * successful, otherwise NULL
@@ -46,9 +47,7 @@ class SLinkedList {
         /**
          * Overloaded constructor that takes arbitrary number of arguments and
          * initializes the list with them.
-         * @param arg_count the number of arguments that is being passed after
-         * arg_count
-         * @param ... arg_count number of arguments to initialize the list with
+         * @param i_list std::initializer_list to populate from
          **/
         SLinkedList(std::initializer_list<T> i_list);
 
@@ -74,24 +73,20 @@ class SLinkedList {
          * @return ture on success
          *         false on failure
          **/
-        bool InsertBack(T element);
+        void InsertBack(T element);
 
         /**
          * Function that adds an element to the beginning of the list.
          * @param element element to be added
-         * @return true on success
-         *         false in failure
          **/
-        bool InsertFront(T element);
+        void InsertFront(T element);
 
         /**
          * Function that adds an element at the given position. 
          * @param element element to be added
          * @param index index the position of the new element
-         * @return true on success
-         *         false on failure 
          **/
-        bool InsertAt(T element, int index);
+        void InsertAt(T element, int index);
 
         /**
          * Function that returns the last element in the list.
@@ -143,18 +138,18 @@ class SLinkedList {
          * @return true on success
          *         false on failure
          **/
-        bool Erase();
+        void Erase();
         
         /**
          * Function that gives the number of elements in the list.
          * @return number of elements in the list
          **/
-        size_t Size() const;
+        [[nodiscard]] size_t Size() const;
 };
 
 template <typename T>
 SLinkedList<T>::SLinkedList(std::initializer_list<T> i_list) {
-    this->head = NULL;
+    this->head = nullptr;
     for (T elem : i_list) {
         InsertBack(elem);
     }
@@ -162,7 +157,7 @@ SLinkedList<T>::SLinkedList(std::initializer_list<T> i_list) {
 
 template <typename T>
 SLinkedList<T>::SLinkedList(const SLinkedList &s_list) {
-    this->head= NULL;
+    this->head= nullptr;
     for (int i = 0; i < s_list->Size(); ++i) {
         InsertBack(s_list->ElementAt(i));
     }
@@ -170,7 +165,7 @@ SLinkedList<T>::SLinkedList(const SLinkedList &s_list) {
 
 template <typename T>
 SLinkedList<T>::SLinkedList() {
-    this->head = NULL;
+    this->head = nullptr;
 }
 
 template <typename T>
@@ -181,90 +176,67 @@ SLinkedList<T>::~SLinkedList() {
 template <typename T>
 SNode<T>* SLinkedList<T>::CreateNode(T element) {
     auto *new_node = new SNode<T>();
-    if (new_node == NULL) {
-        return NULL;
-    }
-    else {
-        new_node->element = element;
-        new_node->next = NULL;
-        return new_node;
-    }
+    new_node->element = element;
+    new_node->next = nullptr;
+    return new_node;
 }
 
 template <typename T>
-bool SLinkedList<T>::InsertBack(T element) {
+void SLinkedList<T>::InsertBack(T element) {
     SNode<T> *new_node = CreateNode(element);
-    if (new_node == NULL) {
-        return false;
-    } 
+    if (this->head == nullptr) {
+        this->head = new_node;
+    }
     else {
-        if (this->head == NULL) {
-            this->head = new_node;
+        SNode<T> *tmp = this->head;
+        while (tmp->next != nullptr) {
+            tmp = tmp->next;
         }
-        else {
-            SNode<T> *tmp = this->head;
-            while (tmp->next != NULL) {
-                tmp = tmp->next;
-            }
-            tmp->next = new_node;
-        }
-        return true;
+        tmp->next = new_node;
     }
 }
 
 template <typename T>
-bool SLinkedList<T>::InsertFront(T element) {
+void SLinkedList<T>::InsertFront(T element) {
     SNode<T> *new_node = CreateNode(element);
-    if (new_node == NULL) {
-        return false;
-    } 
+    if (this->head == NULL) {
+        this->head = new_node;
+    }
     else {
-        if (this->head == NULL) {
-            this->head = new_node;
-        }
-        else {
-            new_node->next = this->head;
-            this->head = new_node;
-        }
-        return true;
+        new_node->next = this->head;
+        this->head = new_node;
     }
 }
 
 template <typename T>
-bool SLinkedList<T>::InsertAt(T element, int index) {
+void SLinkedList<T>::InsertAt(T element, int index) {
     SNode<T> *new_node = CreateNode(element);
     size_t size = Size();
     if (new_node == NULL || index > size) {
         throw std::out_of_range("Index Out Of Range");
     }
     else {
-        if (this->head == NULL) {
-            this->head = new_node;
+        if (index == 0) {
+            InsertFront(element);
+        }
+        else if (index == size) {
+            InsertBack(element);
         }
         else {
-            if (index == 0) {
-                InsertFront(element);
+            SNode<T> *tmp = this->head;
+            for (int i = 0; i < index - 1; ++i) {
+                tmp = tmp->next;
             }
-            else if (index == size) {
-                InsertBack(element);
-            }
-            else {
-                SNode<T> *tmp = this->head;
-                for (int i = 0; i < index - 1; ++i) {
-                    tmp = tmp->next;
-                }
-                new_node->next = tmp->next;
-                tmp->next = new_node;
-            }
+            new_node->next = tmp->next;
+            tmp->next = new_node;
         }
-        return true;
     }
 }
 
 template <typename T>
 T SLinkedList<T>::ElementBack() const {
     SNode<T> *tmp = this->head;
-    while (tmp->next != NULL) {
+    while (tmp->next != nullptr) {
         tmp = tmp->next;
     }
     return tmp->element;
@@ -301,11 +273,11 @@ T SLinkedList<T>::ElementAt(int index) const {
 template <typename T>
 bool SLinkedList<T>::RemoveBack() {
     SNode<T> *tmp = this->head;
-    while (tmp->next->next != NULL) {
+    while (tmp->next->next != nullptr) {
         tmp = tmp->next;
     }
     delete tmp->next;
-    tmp->next = NULL;
+    tmp->next = nullptr;
     return true;
 }
 
@@ -344,25 +316,24 @@ bool SLinkedList<T>::RemoveAt(int index) {
 }
 
 template <typename T>
-bool SLinkedList<T>::Erase() {
+void SLinkedList<T>::Erase() {
     SNode<T> *tmp;
     while (this->head != NULL) {
         tmp = this->head;
         this->head = this->head->next;
         delete tmp;
     }
-    return true;
 }
 
 template <typename T>
 size_t SLinkedList<T>::Size() const {
-    if (this->head == NULL) {
+    if (this->head == nullptr) {
         return 0;
     }
     else {
         SNode<T> *tmp = this->head;
         size_t size = 0;
-        while (tmp != NULL) {
+        while (tmp != nullptr) {
             tmp = tmp->next;
             ++size;
         }

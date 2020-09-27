@@ -16,8 +16,8 @@ template <typename T>
 struct DNode {
 private:
     T element;
-    DNode<T> *next;
-    DNode<T> *prev;
+    DNode<T> *next = nullptr;
+    DNode<T> *prev = nullptr;
 
     template <typename U>
     friend class DLinkedList;
@@ -31,12 +31,14 @@ private:
 
     /**
      * Function that sets the head and the trailer of the list up. It's
-     * basically called at the beginning the each overloaded constructors.
+     * basically called at the beginning of the each overloaded constructors.
+     * Throws std::bad_alloc if unable to allocate memory.
      */
     void Init();
 
     /**
-     * Function to create a node on the heap.
+     * Function to create a node on the heap. Throws std::bad_alloc if
+     * unable to allocate memory.
      * @param element value of the new node
      * @return pointer to the newly created node
      */
@@ -52,8 +54,7 @@ public:
      * Overloaded constructor that takes arbitrary number of elements to
      * initialize the list with. The first argument should be the number of
      * arguments coming after arg_count.
-     * @param arg_count number of argument that is being passed after arg_count
-     * @param ... arg_count number of elements to initialize the list
+     * @param i_list std::initializer_list to populate from
      */
     DLinkedList(std::initializer_list<T> i_list);
 
@@ -74,32 +75,26 @@ public:
      * @return true if there is no element in the list
      *         false otherwise
      */
-    bool IsEmpty() const;
+    [[nodiscard]] bool IsEmpty() const;
 
     /**
      * Inserts a new element at the beginning of the list.
      * @param element value of the new element
-     * @return true on success
-     *         false on failure
      */
-    bool InsertFront(T element);
+    void InsertFront(T element);
 
     /**
      * Inserts a new element at the end of the list.
      * @param element value of the new element
-     * @return true on success
-     *         false on failure
      */
-    bool InsertBack(T element);
+    void InsertBack(T element);
 
     /**
      * Inserts a new element at the specified position of the list.
      * @param element value of the new element
      * @param index position of the new node
-     * @return true on success
-     *         false on failure
      */
-    bool InsertAt(T element, int index);
+    void InsertAt(T element, int index);
 
     /**
      * Function to get the value of the first element in the list.
@@ -159,7 +154,7 @@ public:
      * Function to count the total number of elements in the list.
      * @return size of the list
      */
-    size_t Count() const;
+    [[nodiscard]] size_t Count() const;
 };
 
 template <typename T>
@@ -199,9 +194,6 @@ void DLinkedList<T>::Init() {
 template <typename T>
 DNode<T>* DLinkedList<T>::CreateNode(T element) {
     auto *new_node = new DNode<T>();
-    if (new_node == nullptr)
-        return nullptr;
-
     new_node->element = element;
     new_node->next = nullptr;
     new_node->prev = nullptr;
@@ -209,76 +201,66 @@ DNode<T>* DLinkedList<T>::CreateNode(T element) {
 }
 
 template <typename T>
-bool DLinkedList<T>::IsEmpty() const {
+[[nodiscard]] bool DLinkedList<T>::IsEmpty() const {
     if (head->next == trailer && trailer->prev == head) return true;
     else return false;
 }
 
 template <typename T>
-bool DLinkedList<T>::InsertFront(T element) {
+void DLinkedList<T>::InsertFront(T element) {
     DNode<T> *new_node = CreateNode(element);
-    if (new_node != nullptr) { // mem allocation was successful
-        if (IsEmpty()) {
-            head->next = new_node;
-            new_node->prev = head;
-            trailer->prev = new_node;
-            new_node->next = trailer;
-        }
-        else {
-            new_node->prev = head;
-            new_node->next = head->next;
-            head->next->prev = new_node;
-            head->next = new_node;
-        }
-        return true;
+    if (IsEmpty()) {
+        head->next = new_node;
+        new_node->prev = head;
+        trailer->prev = new_node;
+        new_node->next = trailer;
     }
-    return false;
+    else {
+        new_node->prev = head;
+        new_node->next = head->next;
+        head->next->prev = new_node;
+        head->next = new_node;
+    }
 }
 
 template <typename T>
-bool DLinkedList<T>::InsertBack(T element) {
+void DLinkedList<T>::InsertBack(T element) {
     DNode<T> *new_node = CreateNode(element);
-    if (new_node != nullptr) { // mem allocation was successful
-        if (IsEmpty()) {
-            head->next = new_node;
-            new_node->prev = head;
-            trailer->prev = new_node;
-            new_node->next = trailer;
-        }
-        else {
-            new_node->next = trailer;
-            new_node->prev = trailer->prev;
-            trailer->prev->next = new_node;
-            trailer->prev = new_node;
-        }
-        return true;
+    if (IsEmpty()) {
+        head->next = new_node;
+        new_node->prev = head;
+        trailer->prev = new_node;
+        new_node->next = trailer;
     }
-    return false;
+    else {
+        new_node->next = trailer;
+        new_node->prev = trailer->prev;
+        trailer->prev->next = new_node;
+        trailer->prev = new_node;
+    }
 }
 
 template <typename T>
-bool DLinkedList<T>::InsertAt(T element, int index) {
+void DLinkedList<T>::InsertAt(T element, int index) {
     size_t size = Count();
     if (index >= size || index < 0) {
         throw std::out_of_range("Index Out Of Range");
     }
     else {
         if (index == 0)
-            return InsertFront(element);
+            InsertFront(element);
         else if (index == size - 1)
-            return InsertBack(element);
+            InsertBack(element);
         else {
             DNode<T> *new_node = CreateNode(element);
-            if (new_node != nullptr) {
-                DNode<T> *tmp = head->next;
-                for (int i = 0; i < index; ++i) {
-                    tmp = tmp->next;
-                }
-                new_node->next = tmp;
-                new_node->prev = tmp->prev;
-                tmp->prev->next = new_node;
-                tmp->prev = new_node;
+            DNode<T> *tmp = head->next;
+            for (int i = 0; i < index; ++i) {
+                tmp = tmp->next;
             }
+            new_node->next = tmp;
+            new_node->prev = tmp->prev;
+            tmp->prev->next = new_node;
+            tmp->prev = new_node;
         }
     }
 }
@@ -375,7 +357,7 @@ void DLinkedList<T>::Erase() {
 }
 
 template <typename T>
-size_t DLinkedList<T>::Count() const {
+[[nodiscard]] size_t DLinkedList<T>::Count() const {
     size_t size = 0;
     DNode<T> *tmp = head->next;
     while (tmp != trailer) {
