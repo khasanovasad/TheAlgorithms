@@ -51,9 +51,8 @@ public:
     DLinkedList();
 
     /**
-     * Overloaded constructor that takes arbitrary number of elements to
-     * initialize the list with. The first argument should be the number of
-     * arguments coming after arg_count.
+     * Overloaded constructor that takes arbitrary number of arguments to
+     * populate the list
      * @param i_list std::initializer_list to populate from
      */
     DLinkedList(std::initializer_list<T> i_list);
