@@ -16,8 +16,8 @@ endif()
 
 
 add_executable(DS-Cpp main.cpp
-        "include/SLinkedList.h"
-        "include/DLinkedList.h"
+    "include/SLinkedList.h"
+    "include/DLinkedList.h"
 )
 
 target_include_directories(DS-Cpp PUBLIC "${PROJECT_SOURCE_DIR}/include")
