@@ -1,3 +1,11 @@
+/**
+ * @file    Stack.h
+ * @author  Asadbek Khasanov
+ * @date    October 16, 2020
+ * @brief   File containing the implementation of generic Stack data
+ *          structure using genering double linked list.
+ **/
+
 #ifndef STACK_H
 #define STACK_H
 
@@ -6,9 +14,15 @@
 #include "DLinkedList.h"
 
 namespace DSCpp {
+    /**
+     * Templated class as an interface to Stack ADT
+     **/
     template <typename T>
     class Stack {
         private:
+            // DLinkedList<T> is the underlying data structure to hold
+            // the actual data in certain organization. Stack class only 
+            // controls how the data is accessed and inserted.
             DLinkedList<T> *list = nullptr;
 
         public:
@@ -16,14 +30,42 @@ namespace DSCpp {
 
             ~Stack();
 
+            /**
+             * Function to push element on to the stack.
+             * @param element constant reference to T type object
+             **/
             void Push(const T &element);
 
+            /**
+             * Function to pop element from the top of the stack.
+             * Thorows std::underflow_error if the stack is empty and
+             * there is no element to pop.
+             * @return copy of the element on the top of the stack.
+             **/
             T Pop();
 
+            /**
+             * Function to return a reference to the top of the stack.
+             * Throws std::underflow_error if the stack is empty and
+             * there is no element on the top of the stack.
+             * @return reference to the top of the stack. 
+             **/
             T& Top() const;
 
+            /**
+             * Function that counts the number of elements in the stack
+             * and returns it. Discarding the return value will couse compiler
+             * warnings.
+             * @return number of elements on the stack.
+             **/
             [[nodiscard]] int Count() const;
 
+            /**
+             * Function that to determine if the list is empty.
+             * Discarding the return value will couse compiler warnings.
+             * @return true if the list is empty
+             *         false otherwise
+             **/
             [[nodiscard]] bool IsEmpty() const;
     };
 
@@ -45,14 +87,22 @@ namespace DSCpp {
 
     template <typename T>
     T Stack<T>::Pop() {
-        T tmp = list->ElementBack();
-        list->RemoveBack();
-        return tmp;
+        if (!IsEmpty()) {
+            T tmp = list->ElementBack();
+            list->RemoveBack();
+            return tmp;
+        } else {
+            throw std::underflow_error("Stack Underflow!");
+        }
     }
 
     template <typename T>
     T& Stack<T>::Top() const {
-        return list->ElementBack();     
+        if (!IsEmpty()) {
+            return list->ElementBack();     
+        } else {
+            throw std::underflow_error("Stack Underflow!");
+        }
     }
 
     template <typename T>
