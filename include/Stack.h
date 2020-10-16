@@ -3,7 +3,7 @@
  * @author  Asadbek Khasanov
  * @date    October 16, 2020
  * @brief   File containing the implementation of generic Stack data
- *          structure using genering double linked list.
+ *          structure using genering doubly linked list.
  **/
 
 #ifndef STACK_H
@@ -61,9 +61,9 @@ namespace DSCpp {
             [[nodiscard]] int Count() const;
 
             /**
-             * Function that to determine if the list is empty.
+             * Function that to determine if the stack is empty.
              * Discarding the return value will couse compiler warnings.
-             * @return true if the list is empty
+             * @return true if the stack is empty
              *         false otherwise
              **/
             [[nodiscard]] bool IsEmpty() const;
@@ -115,4 +115,5 @@ namespace DSCpp {
         return list->IsEmpty();
     }
 }
+
 #endif // STACK_H
