@@ -14,9 +14,15 @@
 #include "DLinkedList.h"
 
 namespace DSCpp {
+    /**
+     * Templated class as an interface to Deque ADT
+     **/
     template <typename T>
     class Deque {
         private:
+            // DLinkedList<T> is the underlying data structure to hold
+            // the actual data in certain organization. Deque class only 
+            // controls how the data is accessed and inserted.
             DLinkedList<T> *list = nullptr;
 
         public:
@@ -30,25 +36,58 @@ namespace DSCpp {
              **/
             void PushFront(const T& element);
 
-
+            /**
+             * Function to push push element to the back of the deque.
+             * @param element constant reference to the new element
+             **/
             void PushBack(const T& element);
 
-
+            /**
+             * Function to pop element from the front of the deque.
+             * Thorows std::underflow_error if the deque is empty and
+             * there is no element to pop.
+             * @return copy of the element from the front of the deque
+             **/
             T PopFront();
 
-
+            /**
+             * Function to pop element from the back of the deque.
+             * Thorows std::underflow_error if the deque is empty and
+             * there is no element to pop.
+             * @return copy of the element from the back of the deque
+             **/
             T PopBack();
 
-
+            /**
+             * Function to return a reference to the front of the deque.
+             * Throws std::underflow_error if the deque is empty and
+             * there is no element at the front of the deque.
+             * @return reference to the front of the deque. 
+             **/
             T& Front() const;
 
-
+            /**
+             * Function to return a reference to the back of the deque.
+             * Throws std::underflow_error if the deque is empty and
+             * there is no element at the back of the deque.
+             * @return reference to the back of the deque. 
+             **/
             T& Back() const;
 
-
+            /**
+             * Function that counts the number of elements in the deque
+             * and returns it. Discarding the return value will couse compiler
+             * warnings.
+             * @return number of elements in the deque.
+             **/
             [[nodiscard]] size_t Count() const;
 
-
+            /**
+             * Function to determine if the deque is empty.
+             * Discarding the return value will couse compiler warnings.
+             * @return true if the deque is empty
+             *         false otherwise
+             **/
             [[nodiscard]] bool IsEmpty() const;
     };
 
