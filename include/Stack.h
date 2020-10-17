@@ -3,7 +3,7 @@
  * @author  Asadbek Khasanov
  * @date    October 16, 2020
  * @brief   File containing the implementation of generic Stack data
- *          structure using genering doubly linked list.
+ *          structure using generic doubly linked list.
  **/
 
 #ifndef STACK_H
