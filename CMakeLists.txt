@@ -20,6 +20,7 @@ add_executable(DSCpp main.cpp
     "include/DLinkedList.h"
     "include/Stack.h"
     "include/Queue.h"
+    "include/Deque.h"
 )
 
 target_include_directories(DSCpp PUBLIC "${PROJECT_SOURCE_DIR}/include")
