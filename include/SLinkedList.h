@@ -145,7 +145,7 @@ namespace DSCpp {
              * Function that gives the number of elements in the list.
              * @return number of elements in the list
              **/
-            [[nodiscard]] size_t Size() const;
+            [[nodiscard]] size_t Count() const;
     };
 
     template <typename T>
@@ -159,7 +159,7 @@ namespace DSCpp {
     template <typename T>
     SLinkedList<T>::SLinkedList(const SLinkedList &s_list) {
         this->head= nullptr;
-        for (int i = 0; i < s_list->Size(); ++i) {
+        for (int i = 0; i < s_list->Count(); ++i) {
             InsertBack(s_list->ElementAt(i));
         }
     }
@@ -212,7 +212,7 @@ namespace DSCpp {
     template <typename T>
     void SLinkedList<T>::InsertAt(T element, int index) {
         SNode<T> *new_node = CreateNode(element);
-        size_t size = Size();
+        size_t size = Count();
         if (new_node == NULL || index > size) {
             throw std::out_of_range("Index Out Of Range");
         }
@@ -250,7 +250,7 @@ namespace DSCpp {
 
     template <typename T>
     T& SLinkedList<T>::ElementAt(int index) const {
-        size_t size = Size();
+        size_t size = Count();
         if (index >= size || index < 0) {
             throw std::out_of_range("Index Out Of Range");
         }
@@ -292,7 +292,7 @@ namespace DSCpp {
 
     template <typename T>
     bool SLinkedList<T>::RemoveAt(int index) {
-        size_t size = Size();
+        size_t size = Count();
         if (index >= size || index < 0) {
             throw std::out_of_range("Index Out Of Range");
         }
@@ -327,7 +327,7 @@ namespace DSCpp {
     }
 
     template <typename T>
-    size_t SLinkedList<T>::Size() const {
+    size_t SLinkedList<T>::Count() const {
         if (this->head == nullptr) {
             return 0;
         }
