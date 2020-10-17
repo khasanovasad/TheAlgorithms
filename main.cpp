@@ -49,7 +49,8 @@ int main(int args, char *argv[]) {
         }
     } while (true);
     */
-    do {
+    /*
+        do {
         Deque<int> myDeque;
 
         std::cout << "PushFront...\n";
@@ -67,5 +68,7 @@ int main(int args, char *argv[]) {
             std::cout << myDeque.PopBack() << "\n";
         }
     } while (false);
+    */
+    
     return 0;
 }
