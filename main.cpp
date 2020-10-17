@@ -5,6 +5,7 @@
 #include "DLinkedList.h"
 #include "Stack.h"
 #include "Queue.h"
+#include "Deque.h"
 
 using namespace DSCpp;
 
@@ -28,6 +29,7 @@ int main(int args, char *argv[]) {
         }
     } while (false);
     */
+    /*
     do {
         Queue<int> myQueue;
 
@@ -46,5 +48,24 @@ int main(int args, char *argv[]) {
             std::cout << myQueue.Pop() << "\n";
         }
     } while (true);
+    */
+    do {
+        Deque<int> myDeque;
+
+        std::cout << "PushFront...\n";
+        for (int i = 0; i < 10; ++i) {
+            std::cout << i << "\n";
+            myDeque.PushFront(i);
+        }
+
+        std::cout << "\nFront: " << myDeque.Front() << "\n";
+        std::cout << "Back: " << myDeque.Back() << "\n\n";
+
+        std::cout << "PopBack...\n";
+        int size = myDeque.Count();
+        for (int i = 0; i < size; ++i) {
+            std::cout << myDeque.PopBack() << "\n";
+        }
+    } while (false);
     return 0;
 }
