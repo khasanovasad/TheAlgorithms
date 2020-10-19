@@ -11,7 +11,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 if (CMAKE_COMPILER_IS_GNUCC) # if gcc is in use
-    add_compile_options(-Wall -Wextra -Wpedantic) #-Werror)
+    add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 endif()
 
 
@@ -21,6 +21,7 @@ add_executable(DSCpp main.cpp
     "include/Stack.h"
     "include/Queue.h"
     "include/Deque.h"
+    "include/Vector.h"
 )
 
 target_include_directories(DSCpp PUBLIC "${PROJECT_SOURCE_DIR}/include")
