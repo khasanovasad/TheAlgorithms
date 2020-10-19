@@ -13,10 +13,14 @@ using namespace DSCpp;
 
 int main(int args, char *argv[]) {
     do {
-        Vector<std::string> vect(20, "sex");
-        // vect.Clear();
-        vect.Erase(0, vect.Size());
-        std::cout << vect.Front() << std::endl;
+        Vector<int> vect;
+        for (int i = 0; i < 15; ++i) {
+            vect.PushBack(i);
+        }
+        vect.Insert(3, 89);
+        for (int i = 0; i < 16; ++i) {
+            std::cout << vect.At(i) << std::endl;
+        }
     } while (false);
     return 0;
 }
