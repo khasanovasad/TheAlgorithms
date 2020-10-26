@@ -49,7 +49,7 @@ namespace ds {
              * List class that is defined as friend.
              * @param u pointer to the Node object.
              */
-            Iterator(Node<T> *u);
+            Iterator(Node<T> *node);
 
             Node<T> *v_;
         };
@@ -130,25 +130,19 @@ namespace ds {
         /**
          * Function to remove the first element in the list and deallocating
          * it's memory.
-         * @return true on success
-         *         false on failure
          */
-        bool RemoveFront();
+        void RemoveFront();
 
         /**
          * Function to remove the last element in the list and deallocating
          * it's memory.
-         * @return true on success
-         *         false on failure
          */
-        bool RemoveBack();
+        void RemoveBack();
 
         /**
          * Function to remove the element at specified index and deallocating
          * it's memory.
          * @param index index of the element to  delete
-         * @return true on success
-         *         false on failure
          */
         void RemoveAt(const Iterator& it);
 
@@ -197,8 +191,8 @@ namespace ds {
     };
 
     template <typename T>
-    List<T>::Iterator::Iterator(Node<T> *u) {
-        v_ = u;
+    List<T>::Iterator::Iterator(Node<T> *node) {
+        v_ = node;
     }
 
     template <typename T>
@@ -253,8 +247,8 @@ namespace ds {
     template <typename T>
     List<T>::List(const List &list) {
         Init();
-        for (int i = 0; i < list.Count(); ++i)
-            InsertBack(list.ElementAt(i));
+        for (int x : list)
+            InsertBack(x);
     }
 
     template <typename T>
@@ -346,33 +340,31 @@ namespace ds {
     }
 
     template <typename T>
-    bool List<T>::RemoveFront() {
+    void List<T>::RemoveFront() {
         if (!IsEmpty()) {
             Node<T> *tmp = head_->next;
             head_->next = head_->next->next;
             delete tmp;
-            return true;
         }
-        else
-            return false;
+        else {
+        }
     }
 
     template <typename T>
-    bool List<T>::RemoveBack() {
+    void List<T>::RemoveBack() {
         if (!IsEmpty()) {
             Node<T> *tmp = trailer_->prev;
             trailer_->prev = trailer_->prev->prev;
             trailer_->prev->next = trailer_;
             delete tmp;
-            return true;
         }
-        else
-            return false;
+        else {
+        }
     }
 
     template <typename T>
     void List<T>::RemoveAt(const Iterator& it) {
-        if (it.v_->next == this->begin().v_->next) { // begin() itarator
+        if (it.v_->next == this->begin().v_->next) { // begin() iterator
             RemoveFront();
         } else if (it.v_->prev == this->end().v_->prev) { // end() iterator
             RemoveBack();
