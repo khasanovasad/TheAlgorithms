@@ -15,7 +15,7 @@ if (CMAKE_COMPILER_IS_GNUCC) # if gcc is in use
 endif()
 
 
-add_executable(DSCpp main.cpp
+add_executable(DSCpp main.cc
     #"include/SLinkedList.h"
     "include/list.h"
     #"include/Stack.h"
