@@ -16,12 +16,14 @@ endif()
 
 
 add_executable(DSCpp main.cpp
-    "include/SLinkedList.h"
-    "include/DLinkedList.h"
-    "include/Stack.h"
-    "include/Queue.h"
-    "include/Deque.h"
-    "include/Vector.h"
+    #"include/SLinkedList.h"
+    "include/list.h"
+    #"include/Stack.h"
+    #"include/Queue.h"
+    #"include/Deque.h"
+    #"include/Vector.h"
 )
+
+target_link_libraries(DSCpp pthread)
 
 target_include_directories(DSCpp PUBLIC "${PROJECT_SOURCE_DIR}/include")
