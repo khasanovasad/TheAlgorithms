@@ -2,25 +2,42 @@
 #include <string>
 #include <vector>
 
-#include "SLinkedList.h"
-#include "DLinkedList.h"
-#include "Stack.h"
-#include "Queue.h"
-#include "Deque.h"
-#include "Vector.h"
+#include "list.h"
 
-using namespace DSCpp;
+void testInsertAt();
+void testRemoveAt();
 
 int main(int args, char *argv[]) {
-    do {
-        Vector<int> vect;
-        for (int i = 0; i < 15; ++i) {
-            vect.PushBack(i);
-        }
-        vect.Insert(3, 89);
-        for (int i = 0; i < 16; ++i) {
-            std::cout << vect.At(i) << std::endl;
-        }
-    } while (false);
-    return 0;
+    // testInsertAt();
+    testRemoveAt();
 }
+
+void testInsertAt() {
+    do {
+        ds::List<int> mylist;
+        for (int i = 0; i < 15; ++i)
+            mylist.InsertBack(i);
+        mylist.InsertAt(89, ++++++++++mylist.begin());
+        mylist.InsertAt(89, mylist.begin());
+        mylist.InsertAt(89, mylist.end());
+        for (int x : mylist)
+            std::cout << x << " ";
+        std::cout << std::endl;
+        // output: 89 1 2 3 4 89 5 6 7 8 9 10 11 12 13 14 89
+    } while (0);
+}
+
+void testRemoveAt() {
+    do {
+        ds::List<int> mylist;
+        for (int i = 0; i < 15; ++i)
+            mylist.InsertBack(i);
+        mylist.RemoveAt(++++mylist.begin());    
+        mylist.RemoveAt(mylist.begin());    
+        mylist.RemoveAt(mylist.end());    
+        for (int x : mylist)
+            std::cout << x << " ";
+        std::cout << std::endl;
+        // output: 1 3 4 5 6 7 8 9 10 11 12 13
+    } while (1);
+} 
