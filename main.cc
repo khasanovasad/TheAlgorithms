@@ -4,6 +4,7 @@
 
 #include "list.h"
 
+void testCopyCtor();
 void testInitList();
 void testInsertionOnEmptyList();
 void testInsertAt();
@@ -11,15 +12,32 @@ void testRemoveAt();
 void testPrePostIncrementDecrement();
 
 int main(int args, char *argv[]) {
-    testInsertionOnEmptyList();
+    testCopyCtor();
+    // testInitList();
+    // testInsertionOnEmptyList();
     // testInsertAt();
     // testRemoveAt();
     // testPrePostIncrementDecrement();
 }
 
+void testCopyCtor() {
+    do {
+        ds::List<std::string> mylist;
+        for (int i = 0; i < 5; ++i)
+            mylist.InsertBack("sex is good");
+        ds::List<std::string> mylist2(mylist);
+        for (auto x : mylist2)
+            std::cout << x << std::endl;
+    } while (0);
+}
+
 void testInitList() {
     do {
-
+        ds::List<int> mylist =  { 0, 1, 2, 3, 4 };
+        for (int i = 5; i < 10; ++i)
+            mylist.InsertBack(i);
+        for (int x : mylist)
+            std::cout << x << std::endl;
     } while (0);
 }
 
@@ -27,8 +45,9 @@ void testInsertionOnEmptyList() {
     if (true) {
         do {
             ds::List<int> mylist; 
-            for (auto it = mylist.begin(); it != mylist.end(); ++it)
-                mylist.InsertAt(89, it);
+            mylist.InsertAt(89, mylist.begin());
+            mylist.InsertAt(89, mylist.begin());
+            mylist.InsertAt(89, mylist.begin());
             for (int x : mylist)
                 std::cout << x << " ";
             std::cout << std::endl;
