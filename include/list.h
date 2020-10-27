@@ -9,6 +9,7 @@
 #ifndef LIST_H
 #define LIST_H
 
+#include <iostream>
 #include <stdexcept>
 #include <initializer_list>
 
@@ -16,9 +17,6 @@ namespace ds {
     template <typename T>
     class List {
     private:
-        /**
-         * Templated struct as an individual node of the list.
-         */
         template <typename U>
         struct Node {
             U element;
@@ -27,18 +25,19 @@ namespace ds {
         };
 
     public:
-        /**
-         * Iterator nested class.
-         */
         class Iterator {
         public:
             T& operator*();
 
-            bool operator==(const Iterator& it);
-            bool operator!=(const Iterator& it);
+            bool operator==(const Iterator& it) const;
+            bool operator!=(const Iterator& it) const;
 
+            // pre increment & decrement
             Iterator& operator++();
             Iterator& operator--();
+            // post increment & decrement
+            Iterator operator++(int);
+            Iterator operator--(int);
 
             template <typename U>
             friend class List;
@@ -201,12 +200,12 @@ namespace ds {
     }
 
     template <typename T>
-    bool List<T>::Iterator::operator==(const Iterator& it) {
+    bool List<T>::Iterator::operator==(const Iterator& it) const {
         return v_ == it.v_;
     }
 
     template <typename T>
-    bool List<T>::Iterator::operator!=(const Iterator& it) {
+    bool List<T>::Iterator::operator!=(const Iterator& it) const {
         return v_ != it.v_;
     }
 
@@ -220,6 +219,20 @@ namespace ds {
     typename List<T>::Iterator& List<T>::Iterator::operator--() {
         v_ = v_->prev;
         return *this;
+    }
+
+    template <typename T>
+    typename List<T>::Iterator List<T>::Iterator::operator++(int) {
+        auto tmp = Iterator(this->v_);
+        v_ = v_->next;
+        return tmp;
+    }
+
+    template <typename T>
+    typename List<T>::Iterator List<T>::Iterator::operator--(int) {
+        auto tmp = Iterator(this->v_);
+        v_ = v_->prev;
+        return tmp;
     }
 
     template <typename T>
@@ -317,11 +330,17 @@ namespace ds {
 
     template <typename T>
     void List<T>::InsertAt(T element, const Iterator& it) {
-        Node<T> *new_node = CreateNode(element);
-        it.v_->prev->next = new_node;
-        new_node->prev = it.v_->prev;
-        it.v_->prev = new_node;
-        new_node->next = it.v_;
+        if (it == begin()) {
+            InsertFront(element);
+        } else if (it == end()) {
+            InsertBack(element);
+        } else {
+            Node<T> *new_node = CreateNode(element);
+            it.v_->prev->next = new_node;
+            new_node->prev = it.v_->prev;
+            it.v_->prev = new_node;
+            new_node->next = it.v_;
+        }
     }
 
     template <typename T>
@@ -345,8 +364,7 @@ namespace ds {
             Node<T> *tmp = head_->next;
             head_->next = head_->next->next;
             delete tmp;
-        }
-        else {
+        } else {
         }
     }
 
@@ -357,16 +375,15 @@ namespace ds {
             trailer_->prev = trailer_->prev->prev;
             trailer_->prev->next = trailer_;
             delete tmp;
-        }
-        else {
+        } else {
         }
     }
 
     template <typename T>
     void List<T>::RemoveAt(const Iterator& it) {
-        if (it.v_->next == this->begin().v_->next) { // begin() iterator
+        if (it == begin()) {
             RemoveFront();
-        } else if (it.v_->prev == this->end().v_->prev) { // end() iterator
+        } else if (it == end()){
             RemoveBack();
         } else {
             it.v_->prev->next = it.v_->next;
