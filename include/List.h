@@ -41,6 +41,7 @@ namespace ds {
 
             template <typename U>
             friend class List;
+
         private:
             /**
              * Private constructor to initialize an iterator with
@@ -99,7 +100,7 @@ namespace ds {
         /**
          * Inserts a new element at the specified position of the list.
          * @param element value of the new element
-         * @param index position of the new node
+         * @param it position of the required element
          */
         void InsertAt(T element, const Iterator& it);
 
@@ -121,7 +122,7 @@ namespace ds {
          * Function to get the value of the element at specified position
          * in the list. Throws an exception if the index is out of the range or
          * the list is empty.
-         * @param index position of the required element
+         * @param it iterator/position of the element to be retreived.
          * @return reference value of the element at specified position
          */
         T& ElementAt(const Iterator& it) const;
@@ -141,7 +142,7 @@ namespace ds {
         /**
          * Function to remove the element at specified index and deallocating
          * it's memory.
-         * @param index index of the element to  delete
+         * @param it iterator/position of the element to be removed.
          */
         void RemoveAt(const Iterator& it);
 
