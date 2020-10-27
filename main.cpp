@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-#include "list.h"
+#include "List.h"
 
 void testCopyCtor();
 void testInitList();
