@@ -260,7 +260,7 @@ namespace ds {
     template <typename T>
     List<T>::List(const List &list) {
         Init();
-        for (int x : list)
+        for (auto x : list)
             InsertBack(x);
     }
 
