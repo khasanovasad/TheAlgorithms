@@ -4,7 +4,7 @@
  * @date    September 24, 2020
  * @brief   File containing the implementation of generic 
  *          Doubly Linked List data structure.
- **/
+ */
 
 #ifndef LIST_H
 #define LIST_H
@@ -20,8 +20,8 @@ namespace ds {
         template <typename U>
         struct Node {
             U element;
-            Node<U> *next = nullptr;
-            Node<U> *prev = nullptr;
+            Node<U> *next_ = nullptr;
+            Node<U> *prev_ = nullptr;
         };
 
     public:
@@ -212,33 +212,33 @@ namespace ds {
 
     template <typename T>
     typename List<T>::Iterator& List<T>::Iterator::operator++() {
-        v_ = v_->next;
+        v_ = v_->next_;
         return *this;
     }
 
     template <typename T>
     typename List<T>::Iterator& List<T>::Iterator::operator--() {
-        v_ = v_->prev;
+        v_ = v_->prev_;
         return *this;
     }
 
     template <typename T>
     typename List<T>::Iterator List<T>::Iterator::operator++(int) {
         auto tmp = Iterator(this->v_);
-        v_ = v_->next;
+        v_ = v_->next_;
         return tmp;
     }
 
     template <typename T>
     typename List<T>::Iterator List<T>::Iterator::operator--(int) {
         auto tmp = Iterator(this->v_);
-        v_ = v_->prev;
+        v_ = v_->prev_;
         return tmp;
     }
 
     template <typename T>
     typename List<T>::Iterator List<T>::begin() const {
-        return Iterator(head_->next);
+        return Iterator(head_->next_);
     }
 
     template <typename T>
@@ -276,22 +276,22 @@ namespace ds {
     void List<T>::Init() {
         head_ = new Node<T>();
         trailer_ = new Node<T>();
-        head_->next = trailer_;
-        trailer_->prev = head_;
+        head_->next_ = trailer_;
+        trailer_->prev_ = head_;
     }
 
     template <typename T>
     typename List<T>::template Node<T>* List<T>::CreateNode(T element) {
         auto *new_node = new Node<T>();
         new_node->element = element;
-        new_node->next = nullptr;
-        new_node->prev = nullptr;
+        new_node->next_ = nullptr;
+        new_node->prev_ = nullptr;
         return new_node;
     }
 
     template <typename T>
     [[nodiscard]] bool List<T>::IsEmpty() const {
-        if (head_->next == trailer_ && trailer_->prev == head_) return true;
+        if (head_->next_ == trailer_ && trailer_->prev_ == head_) return true;
         else return false;
     }
 
@@ -299,16 +299,16 @@ namespace ds {
     void List<T>::InsertFront(T element) {
         Node<T> *new_node = CreateNode(element);
         if (IsEmpty()) {
-            head_->next = new_node;
-            new_node->prev = head_;
-            trailer_->prev = new_node;
-            new_node->next = trailer_;
+            head_->next_ = new_node;
+            new_node->prev_ = head_;
+            trailer_->prev_ = new_node;
+            new_node->next_ = trailer_;
         }
         else {
-            new_node->prev = head_;
-            new_node->next = head_->next;
-            head_->next->prev = new_node;
-            head_->next = new_node;
+            new_node->prev_ = head_;
+            new_node->next_ = head_->next_;
+            head_->next_->prev_ = new_node;
+            head_->next_ = new_node;
         }
     }
 
@@ -316,16 +316,16 @@ namespace ds {
     void List<T>::InsertBack(T element) {
         Node<T> *new_node = CreateNode(element);
         if (IsEmpty()) {
-            head_->next = new_node;
-            new_node->prev = head_;
-            trailer_->prev = new_node;
-            new_node->next = trailer_;
+            head_->next_ = new_node;
+            new_node->prev_ = head_;
+            trailer_->prev_ = new_node;
+            new_node->next_ = trailer_;
         }
         else {
-            new_node->next = trailer_;
-            new_node->prev = trailer_->prev;
-            trailer_->prev->next = new_node;
-            trailer_->prev = new_node;
+            new_node->next_ = trailer_;
+            new_node->prev_ = trailer_->prev_;
+            trailer_->prev_->next_ = new_node;
+            trailer_->prev_ = new_node;
         }
     }
 
@@ -337,21 +337,21 @@ namespace ds {
             InsertBack(element);
         } else {
             Node<T> *new_node = CreateNode(element);
-            it.v_->prev->next = new_node;
-            new_node->prev = it.v_->prev;
-            it.v_->prev = new_node;
-            new_node->next = it.v_;
+            it.v_->prev_->next_ = new_node;
+            new_node->prev_ = it.v_->prev_;
+            it.v_->prev_ = new_node;
+            new_node->next_ = it.v_;
         }
     }
 
     template <typename T>
     T& List<T>::ElementFront() const {
-        return head_->next->element;
+        return head_->next_->element;
     }
 
     template <typename T>
     T& List<T>::ElementBack() const {
-        return trailer_->prev->element;
+        return trailer_->prev_->element;
     }
 
     template <typename T>
@@ -362,8 +362,8 @@ namespace ds {
     template <typename T>
     void List<T>::RemoveFront() {
         if (!IsEmpty()) {
-            Node<T> *tmp = head_->next;
-            head_->next = head_->next->next;
+            Node<T> *tmp = head_->next_;
+            head_->next_ = head_->next_->next_;
             delete tmp;
         } else {
         }
@@ -372,9 +372,9 @@ namespace ds {
     template <typename T>
     void List<T>::RemoveBack() {
         if (!IsEmpty()) {
-            Node<T> *tmp = trailer_->prev;
-            trailer_->prev = trailer_->prev->prev;
-            trailer_->prev->next = trailer_;
+            Node<T> *tmp = trailer_->prev_;
+            trailer_->prev_ = trailer_->prev_->prev_;
+            trailer_->prev_->next_ = trailer_;
             delete tmp;
         } else {
         }
@@ -387,8 +387,8 @@ namespace ds {
         } else if (it == end()){
             RemoveBack();
         } else {
-            it.v_->prev->next = it.v_->next;
-            it.v_->next->prev = it.v_->prev;
+            it.v_->prev_->next_ = it.v_->next_;
+            it.v_->next_->prev_ = it.v_->prev_;
             delete it.v_;
         }
     }
@@ -396,20 +396,20 @@ namespace ds {
     template <typename T>
     void List<T>::Erase() {
         Node<T> *tmp;
-        while (head_->next != trailer_) {
-            tmp = head_->next;
-            head_->next = tmp->next;
+        while (head_->next_ != trailer_) {
+            tmp = head_->next_;
+            head_->next_ = tmp->next_;
             delete tmp;
         }
-        trailer_->prev = head_;
+        trailer_->prev_ = head_;
     }
 
     template <typename T>
     [[nodiscard]] size_t List<T>::Count() const {
         size_t size = 0;
-        Node<T> *tmp = head_->next;
+        Node<T> *tmp = head_->next_;
         while (tmp != trailer_) {
-            tmp = tmp->next;
+            tmp = tmp->next_;
             ++size;
         }
         return size;

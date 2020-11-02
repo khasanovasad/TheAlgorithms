@@ -11,19 +11,19 @@
 
 #include <stdexcept>
 
-#include "DLinkedList.h"
+#include "List.h"
 
-namespace DSCpp {
+namespace ds {
     /**
      * Templated class as an interface to Deque ADT
      **/
     template <typename T>
     class Deque {
         private:
-            // DLinkedList<T> is the underlying data structure to hold
+            // List<T> is the underlying data structure to hold
             // the actual data in certain organization. Deque class only 
             // controls how the data is accessed and inserted.
-            DLinkedList<T> *list = nullptr;
+            List<T> *list = nullptr;
 
         public:
             Deque();
@@ -93,7 +93,7 @@ namespace DSCpp {
 
     template <typename T>
     Deque<T>::Deque() {
-        list = new DLinkedList<T>();
+        list = new List<T>();
     }
 
     template <typename T>

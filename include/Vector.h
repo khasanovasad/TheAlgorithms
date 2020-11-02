@@ -1,6 +1,6 @@
 /**
  * @file    Vector.h
- * @author  Asadbek Khasanov 
+ * @author  Asadbek Khasanov
  * @date    October 19, 2020
  * @brief   File containing the implementation of generic Vector
  *          data structure.
@@ -12,21 +12,13 @@
 #include <iostream>
 #include <stdexcept>
 
-namespace DSCpp {
+namespace ds {
     /**
      * Templated class as an interface to Vector.
      **/
     template <typename T>
     class Vector {
-        private:
-            // keeps track of the number of elemnts
-            size_t size = 0;
-
-            // pointer to the actual data
-            T *ptr = nullptr;
-
-
-        public:
+    public:
             /**
              * Default constructor.
              **/
@@ -56,7 +48,7 @@ namespace DSCpp {
 
             /**
              * Destructor.
-             **/ 
+             **/
             ~Vector();
 
             /**
@@ -70,7 +62,7 @@ namespace DSCpp {
              * Throws std::underflow_error if the vector is empty and
              * there is no element to pop.
              * @return value of the popped element
-             **/ 
+             **/
             T PopBack();
 
             /**
@@ -101,7 +93,7 @@ namespace DSCpp {
             /**
              * Function to insert and element at specified position.
              * Throws std::out_of_range is the vector is empty or
-             * given index is out of range. 
+             * given index is out of range.
              * @param index position of the new element
              * @param newElem value of the new element
              **/
@@ -148,6 +140,13 @@ namespace DSCpp {
              *         false if not
              **/
             [[nodiscard]] bool IsEmpty() const;
+
+        private:
+            // keeps track of the number of elemnts
+            size_t size = 0;
+
+            // pointer to the actual data
+            T *ptr = nullptr;
     };
 
     template <typename T>
@@ -197,7 +196,7 @@ namespace DSCpp {
 
     template <typename T>
     T& Vector<T>::Back() const {
-        if (size != 0) 
+        if (size != 0)
             return At(size - 1);
         else
             throw std::out_of_range("Attemt to access element of empty Vector!");
@@ -234,7 +233,7 @@ namespace DSCpp {
                 At(index) = newElem;
             } else {
                 throw std::out_of_range("Invalid index!");
-            } 
+            }
         } else {
             throw std::out_of_range("Attempt to insert to empty Vector!");
         }
@@ -256,7 +255,7 @@ namespace DSCpp {
                     if (i < index)
                         tmpPtr[i] = this->ptr[i];
                     else if (i > index)
-                        tmpPtr[i - 1] = this->ptr[i]; 
+                        tmpPtr[i - 1] = this->ptr[i];
                     else
                         continue;
                 }
@@ -283,11 +282,11 @@ namespace DSCpp {
                     else if (i >= from && i < upto)
                         continue;
                     else if (i >= upto)
-                        tmpPtr[i - (this->size - newSize)] = this->ptr[i]; 
+                        tmpPtr[i - (this->size - newSize)] = this->ptr[i];
                 }
                 delete[] this->ptr;
                 this->ptr = tmpPtr;
-                this->size = newSize; 
+                this->size = newSize;
             } else {
                 throw std::out_of_range("Invalid range!");
             }

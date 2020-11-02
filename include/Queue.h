@@ -11,19 +11,19 @@
 
 #include <stdexcept>
 
-#include "DLinkedList.h"
+#include "List.h"
 
-namespace DSCpp {
+namespace ds {
     /**
      * Templated class as an interface to Queue ADT
      **/
     template <typename T>
     class Queue {
         private:
-            // DLinkedList<T> is the underlying data structure to hold
+            // List<T> is the underlying data structure to hold
             // the actual data in certain organization. Queue class only 
             // controls how the data is accessed and inserted.
-            DLinkedList<T> *list = nullptr;
+            List<T> *list = nullptr;
 
         public:
             Queue();      
@@ -79,7 +79,7 @@ namespace DSCpp {
 
     template <typename T>
     Queue<T>::Queue() {
-        list = new DLinkedList<T>();
+        list = new List<T>();
     }
 
     template <typename T>
