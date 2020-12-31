@@ -13,8 +13,7 @@
 #include <stdexcept>
 #include <initializer_list>
 
-namespace ds
-{
+namespace ds {
     template <typename T>
     class list {
     private:
