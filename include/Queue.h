@@ -11,7 +11,7 @@
 
 #include <stdexcept>
 
-#include "List.h"
+#include "list.h"
 
 namespace ds {
     /**
@@ -20,10 +20,10 @@ namespace ds {
     template <typename T>
     class Queue {
         private:
-            // List<T> is the underlying data structure to hold
+            // list<T> is the underlying data structure to hold
             // the actual data in certain organization. Queue class only 
             // controls how the data is accessed and inserted.
-            List<T> *list = nullptr;
+            list<T> *list = nullptr;
 
         public:
             Queue();      
@@ -79,7 +79,7 @@ namespace ds {
 
     template <typename T>
     Queue<T>::Queue() {
-        list = new List<T>();
+        list = new list<T>();
     }
 
     template <typename T>
@@ -90,14 +90,14 @@ namespace ds {
 
     template <typename T>
     void Queue<T>::Push(const T& element) {
-        list->InsertBack(element);
+        list->add_back(element);
     }
 
     template <typename T>
     T Queue<T>::Pop() {
         if (!IsEmpty()) {
-            T tmp = list->ElementFront(); 
-            list->RemoveFront();
+            T tmp = list->get_front();
+            list->delete_front();
             return tmp;
         } else {
             throw std::underflow_error("Queue Underflow!");
@@ -107,7 +107,7 @@ namespace ds {
     template <typename T>
     T& Queue<T>::Front() const {
         if (!IsEmpty()) {
-            return list->ElementFront();
+            return list->get_front();
         } else {
             throw std::underflow_error("Queue Underflow!");
         }
@@ -116,7 +116,7 @@ namespace ds {
     template <typename T>
     T& Queue<T>::Back() const {
         if (!IsEmpty()) {
-            return list->ElementBack();
+            return list->get_back();
         } else {
             throw std::underflow_error("Queue Underflow!");
         }
@@ -124,12 +124,12 @@ namespace ds {
 
     template <typename T>
     [[nodiscard]] int Queue<T>::Count() const {
-        return list->Count();
+        return list->count();
     }
 
     template <typename T>
     [[nodiscard]] bool Queue<T>::IsEmpty() const {
-        return list->IsEmpty();
+        return list->is_empty();
     }
 }
 

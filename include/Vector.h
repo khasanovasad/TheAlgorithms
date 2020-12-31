@@ -113,7 +113,7 @@ namespace ds {
             void Erase(int index);
 
             /**
-             * Overloaded version of the Erase function that removes elements
+             * Overloaded version of the erase function that removes elements
              * in specifier range. Throws if the range is invalid or the vector
              * is empty.
              * @param from lower bound of the range
@@ -164,7 +164,7 @@ namespace ds {
 
     template <typename T>
     Vector<T>::Vector(const Vector<T>& vector) {
-        Resize(vector->Count());
+        Resize(vector->count());
         for (int i = 0; i < vector.Count(); ++i) {
             At(i) = vector.At(i);
         }

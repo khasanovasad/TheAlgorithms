@@ -11,7 +11,7 @@
 
 #include <stdexcept>
 
-#include "List.h"
+#include "list.h"
 
 namespace ds {
     /**
@@ -20,10 +20,10 @@ namespace ds {
     template <typename T>
     class Deque {
         private:
-            // List<T> is the underlying data structure to hold
+            // list<T> is the underlying data structure to hold
             // the actual data in certain organization. Deque class only 
             // controls how the data is accessed and inserted.
-            List<T> *list = nullptr;
+            list<T> *list = nullptr;
 
         public:
             Deque();
@@ -93,7 +93,7 @@ namespace ds {
 
     template <typename T>
     Deque<T>::Deque() {
-        list = new List<T>();
+        list = new list<T>();
     }
 
     template <typename T>
@@ -104,19 +104,19 @@ namespace ds {
 
     template <typename T>
     void Deque<T>::PushFront(const T& element) {
-        list->InsertFront(element);
+        list->add_front(element);
     }
 
     template <typename T>
     void Deque<T>::PushBack(const T& element) {
-        list->InsertBack(element);
+        list->add_back(element);
     }
 
     template <typename T>
     T Deque<T>::PopFront() {
         if (!IsEmpty()) {
-            T tmp = list->ElementFront();
-            list->RemoveFront();
+            T tmp = list->get_front();
+            list->delete_front();
             return tmp;
         } else {
             throw std::underflow_error("Deque Underflow!");
@@ -126,8 +126,8 @@ namespace ds {
     template <typename T>
     T Deque<T>::PopBack() {
         if (!IsEmpty()) {
-            T tmp = list->ElementBack();
-            list->RemoveBack();
+            T tmp = list->get_back();
+            list->delete_back();
             return tmp;
         } else {
             throw std::underflow_error("Deque Underflow!");
@@ -136,22 +136,22 @@ namespace ds {
 
     template <typename T>
     T& Deque<T>::Front() const {
-        return list->ElementFront();
+        return list->get_front();
     }
 
     template <typename T>
     T& Deque<T>::Back() const {
-        return list->ElementBack();
+        return list->get_back();
     }
 
     template <typename T>
     [[nodiscard]] size_t Deque<T>::Count() const {
-        return list->Count();
+        return list->count();
     }
 
     template <typename T>
     [[nodiscard]] bool Deque<T>::IsEmpty() const {
-        return list->IsEmpty();
+        return list->is_empty();
     }
 }
 

@@ -3,7 +3,7 @@
 #include <vector>
 #include <chrono>
 
-#include "List.h"
+#include "list.h"
 
 void benchmarkTime();
 void testCopyCtor();

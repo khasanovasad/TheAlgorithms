@@ -2,11 +2,7 @@
 #include <string>
 #include <chrono>
 
-#include "List.h"
-#include "Vector.h"
-#include "Stack.h"
-#include "Deque.h"
-#include "Queue.h"
+#include "list.h"
 
 void benchmarkTime();
 
@@ -18,9 +14,9 @@ void benchmarkTime() {
     using namespace std::chrono;
     auto start = high_resolution_clock::now();
     {
-        ds::List<int> mylist;
+        ds::list<int> mylist;
         for (int i = 0; i < 1'000'000; ++i)
-            mylist.InsertBack(i);
+            mylist.add_back(i);
         for (auto x : mylist)
             std::cout << x << "\n";
     }

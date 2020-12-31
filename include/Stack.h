@@ -11,7 +11,7 @@
 
 #include <stdexcept> 
 
-#include "List.h"
+#include "list.h"
 
 namespace ds {
     /**
@@ -20,10 +20,10 @@ namespace ds {
     template <typename T>
     class Stack {
         private:
-            // List<T> is the underlying data structure to hold
+            // list<T> is the underlying data structure to hold
             // the actual data in certain organization. Stack class only 
             // controls how the data is accessed and inserted.
-            List<T> *list = nullptr;
+            list<T> *list = nullptr;
 
         public:
             Stack();
@@ -71,7 +71,7 @@ namespace ds {
 
     template <typename T>
     Stack<T>::Stack() {
-        list = new List<T>();
+        list = new list<T>();
     }
 
     template <typename T>
@@ -82,14 +82,14 @@ namespace ds {
 
     template <typename T>
     void Stack<T>::Push(const T &element) {
-        list->InsertBack(element); 
+        list->add_back(element);
     }
 
     template <typename T>
     T Stack<T>::Pop() {
         if (!IsEmpty()) {
-            T tmp = list->ElementBack();
-            list->RemoveBack();
+            T tmp = list->get_back();
+            list->delete_back();
             return tmp;
         } else {
             throw std::underflow_error("Stack Underflow!");
@@ -99,7 +99,7 @@ namespace ds {
     template <typename T>
     T& Stack<T>::Top() const {
         if (!IsEmpty()) {
-            return list->ElementBack();     
+            return list->get_back();
         } else {
             throw std::underflow_error("Stack Underflow!");
         }
@@ -107,12 +107,12 @@ namespace ds {
 
     template <typename T>
     [[nodiscard]] int Stack<T>::Count() const {
-        return list->Count();
+        return list->count();
     }
 
     template <typename T>
     [[nodiscard]] bool Stack<T>::IsEmpty() const {
-        return list->IsEmpty();
+        return list->is_empty();
     }
 }
 
