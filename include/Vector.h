@@ -35,7 +35,7 @@ namespace ds {
              * Overloaded constructor that initializes certain number
              * of elemenets with the given default value.
              * @param initSize initial size
-             * @param defElem default value for elements
+             * @param defElem default value for element_s
              **/
             Vector(int initSize, const T& defElem);
 
@@ -52,50 +52,50 @@ namespace ds {
             ~Vector();
 
             /**
-             * Function to push an element at the end of the vector.
-             * @param constant referce of an element value
+             * Function to push an element_ at the end of the vector.
+             * @param constant referce of an element_ value
              **/
-            void PushBack(const T &element);
+            void PushBack(const T &element_);
 
             /**
-             * Function to pop an element from the back of the vector.
+             * Function to pop an element_ from the back of the vector.
              * Throws std::underflow_error if the vector is empty and
-             * there is no element to pop.
-             * @return value of the popped element
+             * there is no element_ to pop.
+             * @return value of the popped element_
              **/
             T PopBack();
 
             /**
-             * Function to get the reference of the last element in
+             * Function to get the reference of the last element_ in
              * the vector. Throws std::out_of_range if the vector is
-             * empty and there is no element to return.
-             * @return reference of the last element
+             * empty and there is no element_ to return.
+             * @return reference of the last element_
              **/
             T& Back() const;
 
             /**
-             * Function to get the reference of the first element in
+             * Function to get the reference of the first element_ in
              * the vector. Throws std::out_of_range if the vector is
-             * empty and there is no element to return.
-             * @return reference of the first element
+             * empty and there is no element_ to return.
+             * @return reference of the first element_
              **/
             T& Front() const;
 
             /**
-             * Function to get the referece of the element at specified
+             * Function to get the referece of the element_ at specified
              * position. Throws std::out_of_range if the vector is empty
              * or given index is out of the range.
-             * @param index position of the requested element
-             * @return reference of the element at specified position
+             * @param index position of the requested element_
+             * @return reference of the element_ at specified position
              **/
             T& At(int index) const;
 
             /**
-             * Function to insert and element at specified position.
+             * Function to insert and element_ at specified position.
              * Throws std::out_of_range is the vector is empty or
              * given index is out of range.
-             * @param index position of the new element
-             * @param newElem value of the new element
+             * @param index position of the new element_
+             * @param newElem value of the new element_
              **/
             void Insert(int index, const T &newElem);
 
@@ -106,14 +106,14 @@ namespace ds {
             void Clear();
 
             /**
-             * Function to erase the element at specified position.
+             * Function to erase the element_ at specified position.
              * Throws std::out_of_range if the index is out of the range.
-             * @param index position of the element to remove.
+             * @param index position of the element_ to remove.
              **/
             void Erase(int index);
 
             /**
-             * Overloaded version of the erase function that removes elements
+             * Overloaded version of the erase function that removes element_s
              * in specifier range. Throws if the range is invalid or the vector
              * is empty.
              * @param from lower bound of the range
@@ -130,7 +130,7 @@ namespace ds {
 
             /**
              * Function to get the size of the vector.
-             * @return number of elements in the vector
+             * @return number of element_s in the vector
              **/
             [[nodiscard]] size_t Size() const;
 
@@ -178,9 +178,9 @@ namespace ds {
     }
 
     template <typename T>
-    void Vector<T>::PushBack(const T &element) {
+    void Vector<T>::PushBack(const T &element_) {
         Resize(size + 1);
-        At(size - 1) = element;
+        At(size - 1) = element_;
     }
 
     template <typename T>
@@ -199,7 +199,7 @@ namespace ds {
         if (size != 0)
             return At(size - 1);
         else
-            throw std::out_of_range("Attemt to access element of empty Vector!");
+            throw std::out_of_range("Attemt to access element_ of empty Vector!");
     }
 
     template <typename T>
@@ -207,7 +207,7 @@ namespace ds {
         if (size != 0)
             return At(0);
         else
-            throw std::out_of_range("Attemt to access element of empty Vector!");
+            throw std::out_of_range("Attemt to access element_ of empty Vector!");
     }
 
     template <typename T>
@@ -218,7 +218,7 @@ namespace ds {
             else
                 throw std::out_of_range("Invalid index!");
         } else {
-            throw std::out_of_range("Attempt to access element of empty Vector!");
+            throw std::out_of_range("Attempt to access element_ of empty Vector!");
         }
     }
 
@@ -266,7 +266,7 @@ namespace ds {
                 throw std::out_of_range("Invalid index!");
             }
         } else {
-            throw std::out_of_range("Attempt to remove an element from empty Vector!");
+            throw std::out_of_range("Attempt to remove an element_ from empty Vector!");
         }
     }
 
@@ -291,7 +291,7 @@ namespace ds {
                 throw std::out_of_range("Invalid range!");
             }
         } else {
-            throw std::out_of_range("Attempty to remove elements from empty Vector!");
+            throw std::out_of_range("Attempty to remove element_s from empty Vector!");
         }
     }
 

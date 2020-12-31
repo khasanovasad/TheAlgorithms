@@ -31,23 +31,23 @@ namespace ds {
             ~Queue();
 
             /**
-             * Function to push element to the back of the queue.
-             * @param element constant reference to T type object
+             * Function to push element_ to the back of the queue.
+             * @param element_ constant reference to T type object
              **/
-            void Push(const T &element);
+            void Push(const T &element_);
 
             /**
-             * Function to pop element from the front of the queue.
+             * Function to pop element_ from the front of the queue.
              * Thorows std::underflow_error if the queue is empty and
-             * there is no element to pop.
-             * @return copy of the element from the front of the queque
+             * there is no element_ to pop.
+             * @return copy of the element_ from the front of the queque
              **/
             T Pop();
 
             /**
              * Function to return a reference to the front of the queue.
              * Throws std::underflow_error if the queue is empty and
-             * there is no element at the front of the queue.
+             * there is no element_ at the front of the queue.
              * @return reference to the front of the queue. 
              **/
             T& Front() const;
@@ -55,16 +55,16 @@ namespace ds {
             /**
              * Function to return a reference to the back of the queue.
              * Throws std::underflow_error if the queue is empty and
-             * there is no element at the back of the queue.
+             * there is no element_ at the back of the queue.
              * @return reference to the back of the queue. 
              **/
             T& Back() const;
 
             /**
-             * Function that counts the number of elements in the queue
+             * Function that counts the number of element_s in the queue
              * and returns it. Discarding the return value will couse compiler
              * warnings.
-             * @return number of elements in the queue.
+             * @return number of element_s in the queue.
              **/
             [[nodiscard]] int Count() const;
 
@@ -89,8 +89,8 @@ namespace ds {
     }
 
     template <typename T>
-    void Queue<T>::Push(const T& element) {
-        list->add_back(element);
+    void Queue<T>::Push(const T& element_) {
+        list->add_back(element_);
     }
 
     template <typename T>

@@ -14,7 +14,7 @@ void testRemoveAt();
 void testPrePostIncrementDecrement();
 
 int main(int args, char *argv[]) {
-    // benchmarkTime();
+    benchmarkTime();
     // testCopyCtor();
     // testInitList();
     // testInsertionOnEmptyList();

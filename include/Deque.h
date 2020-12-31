@@ -31,37 +31,37 @@ namespace ds {
             ~Deque();
 
             /**
-             * Function to push push element to the front of the deque.
-             * @param element constant reference to the new element
+             * Function to push push element_ to the front of the deque.
+             * @param element_ constant reference to the new element_
              **/
-            void PushFront(const T& element);
+            void PushFront(const T& element_);
 
             /**
-             * Function to push push element to the back of the deque.
-             * @param element constant reference to the new element
+             * Function to push push element_ to the back of the deque.
+             * @param element_ constant reference to the new element_
              **/
-            void PushBack(const T& element);
+            void PushBack(const T& element_);
 
             /**
-             * Function to pop element from the front of the deque.
+             * Function to pop element_ from the front of the deque.
              * Thorows std::underflow_error if the deque is empty and
-             * there is no element to pop.
-             * @return copy of the element from the front of the deque
+             * there is no element_ to pop.
+             * @return copy of the element_ from the front of the deque
              **/
             T PopFront();
 
             /**
-             * Function to pop element from the back of the deque.
+             * Function to pop element_ from the back of the deque.
              * Thorows std::underflow_error if the deque is empty and
-             * there is no element to pop.
-             * @return copy of the element from the back of the deque
+             * there is no element_ to pop.
+             * @return copy of the element_ from the back of the deque
              **/
             T PopBack();
 
             /**
              * Function to return a reference to the front of the deque.
              * Throws std::underflow_error if the deque is empty and
-             * there is no element at the front of the deque.
+             * there is no element_ at the front of the deque.
              * @return reference to the front of the deque. 
              **/
             T& Front() const;
@@ -69,16 +69,16 @@ namespace ds {
             /**
              * Function to return a reference to the back of the deque.
              * Throws std::underflow_error if the deque is empty and
-             * there is no element at the back of the deque.
+             * there is no element_ at the back of the deque.
              * @return reference to the back of the deque. 
              **/
             T& Back() const;
 
             /**
-             * Function that counts the number of elements in the deque
+             * Function that counts the number of element_s in the deque
              * and returns it. Discarding the return value will couse compiler
              * warnings.
-             * @return number of elements in the deque.
+             * @return number of element_s in the deque.
              **/
             [[nodiscard]] size_t Count() const;
 
@@ -103,13 +103,13 @@ namespace ds {
     }
 
     template <typename T>
-    void Deque<T>::PushFront(const T& element) {
-        list->add_front(element);
+    void Deque<T>::PushFront(const T& element_) {
+        list->add_front(element_);
     }
 
     template <typename T>
-    void Deque<T>::PushBack(const T& element) {
-        list->add_back(element);
+    void Deque<T>::PushBack(const T& element_) {
+        list->add_back(element_);
     }
 
     template <typename T>

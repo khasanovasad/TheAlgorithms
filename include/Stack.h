@@ -31,32 +31,32 @@ namespace ds {
             ~Stack();
 
             /**
-             * Function to push element on to the stack.
-             * @param element constant reference to T type object
+             * Function to push element_ on to the stack.
+             * @param element_ constant reference to T type object
              **/
-            void Push(const T &element);
+            void Push(const T &element_);
 
             /**
-             * Function to pop element from the top of the stack.
+             * Function to pop element_ from the top of the stack.
              * Thorows std::underflow_error if the stack is empty and
-             * there is no element to pop.
-             * @return copy of the element on the top of the stack.
+             * there is no element_ to pop.
+             * @return copy of the element_ on the top of the stack.
              **/
             T Pop();
 
             /**
              * Function to return a reference to the top of the stack.
              * Throws std::underflow_error if the stack is empty and
-             * there is no element on the top of the stack.
+             * there is no element_ on the top of the stack.
              * @return reference to the top of the stack. 
              **/
             T& Top() const;
 
             /**
-             * Function that counts the number of elements in the stack
+             * Function that counts the number of element_s in the stack
              * and returns it. Discarding the return value will couse compiler
              * warnings.
-             * @return number of elements on the stack.
+             * @return number of element_s on the stack.
              **/
             [[nodiscard]] int Count() const;
 
@@ -81,8 +81,8 @@ namespace ds {
     }
 
     template <typename T>
-    void Stack<T>::Push(const T &element) {
-        list->add_back(element);
+    void Stack<T>::Push(const T &element_) {
+        list->add_back(element_);
     }
 
     template <typename T>

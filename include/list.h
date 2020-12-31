@@ -7,8 +7,17 @@
 
 namespace ds {
     template <typename T>
-    struct node {
-        T element;
+    class node {
+    public:
+        node() = default;
+
+        node(T& element_) {
+            this->element_ = element_;
+            this->next_ = nullptr;
+            this->prev_ = nullptr;
+        }
+
+        T element_;
         node<T>* next_ = nullptr;
         node<T>* prev_ = nullptr;
     };
@@ -17,7 +26,7 @@ namespace ds {
     class iterator {
     public:
         T& operator*() {
-            return v_->element;
+            return v_->element_;
         }
 
         bool operator==(const iterator& it) const {
@@ -110,8 +119,8 @@ namespace ds {
             return size;
         }
 
-        void add_front(T element) {
-            node<T> *new_node = create_node(element);
+        void add_front(T element_) {
+            auto* new_node = new node<T>(element_);
             if (is_empty()) {
                 head_->next_ = new_node;
                 new_node->prev_ = head_;
@@ -126,8 +135,8 @@ namespace ds {
             }
         }
 
-        void add_back(T element) {
-            node<T> *new_node = create_node(element);
+        void add_back(T element_) {
+            auto* new_node = new node<T>(element_);
             if (is_empty()) {
                 head_->next_ = new_node;
                 new_node->prev_ = head_;
@@ -142,13 +151,13 @@ namespace ds {
             }
         }
 
-        void add_at(T element, const iterator<T>& it) {
+        void add_at(T element_, const iterator<T>& it) {
             if (it == begin()) {
-                add_front(element);
+                add_front(element_);
             } else if (it == end()) {
-                add_back(element);
+                add_back(element_);
             } else {
-                node<T> *new_node = create_node(element);
+                auto* new_node = new node<T>(element_);
                 it.v_->prev_->next_ = new_node;
                 new_node->prev_ = it.v_->prev_;
                 it.v_->prev_ = new_node;
@@ -157,15 +166,15 @@ namespace ds {
         }
 
         T& get_front() const {
-            return head_->next_->element;
+            return head_->next_->element_;
         }
 
         T& get_back() const {
-            return trailer_->prev_->element;
+            return trailer_->prev_->element_;
         }
 
         T& get_at(const iterator<T>& it) const {
-            return it.v_->element;
+            return it.v_->element_;
         }
 
         void delete_front() {
@@ -236,14 +245,6 @@ namespace ds {
             head_->prev_ = nullptr;
             trailer_->prev_ = head_;
             trailer_->next_ = nullptr;
-        }
-
-        node<T>* create_node(const T& element) {
-            auto *new_node = new node<T>();
-            new_node->element = element;
-            new_node->next_ = nullptr;
-            new_node->prev_ = nullptr;
-            return new_node;
         }
 
         node<T>* head_;
