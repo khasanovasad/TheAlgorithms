@@ -1,25 +1,28 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include <cstdio>
-#include <ctime>
+#include <iostream>
+#include <algorithm>
+#include <chrono>
+#include <random>
+#include <string>
 #include <cassert>
 
-void swap(int *a, int *b) {
-    int tmp = *a;
-    *a = *b;
-    *b = tmp;
+void print_time_elapsed() {
+    return;
 }
 
 void print_arr(const int* const arr, const int size, const char* const end) {
     for (int i = 0; i < size; ++i)
-        std::printf("%d%c", arr[i], *end);
+        std::cout << arr[i] << *end;
 }
 
 void fill_in_random(int* const arr,const int size, const int base) {
-    std::srand(std::time(NULL));
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(base, size);
     for (int i = 0; i < size; ++i)
-        arr[i] = std::rand() % size + base;
+        arr[i] = distrib(gen);
 }
 
 void fill_in_decreasing(int* const arr, const int size) {
