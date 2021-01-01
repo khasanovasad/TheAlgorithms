@@ -5,31 +5,31 @@
 
 #include "list.h"
 
-void benchmarkTime();
-void testCopyCtor();
-void testInitList();
-void testInsertionOnEmptyList();
-void testInsertAt();
-void testRemoveAt();
-void testPrePostIncrementDecrement();
+void benchmark_time();
+void test_copy_ctor();
+void test_init_list();
+void test_add_on_empty_list();
+void test_add_at();
+void test_delete_at();
+void test_it_inc_decr();
 
 int main(int args, char *argv[]) {
-    benchmarkTime();
+    // benchmarkTime();
     // testCopyCtor();
     // testInitList();
     // testInsertionOnEmptyList();
-    // testInsertAt();
+    testInsertAt();
     // testRemoveAt();
     // testPrePostIncrementDecrement();
 }
 
-void benchmarkTime() {
+void benchmark_time() {
     using namespace std::chrono;
     auto start = high_resolution_clock::now();
     {
-        ds::list<int> mylist;
+        dsa::list<int> mylist;
         for (int i = 0; i < 10'000'000; ++i)
-            mylist.InsertBack(i);
+            mylist.add_back(i);
         for (auto x : mylist)
             std::cout << x << "\n";
     }
@@ -38,34 +38,34 @@ void benchmarkTime() {
     std::cout << "Time elapsed: " << (double)duration.count() / (double)1000 << std::endl;
 }
 
-void testCopyCtor() {
+void test_copy_ctor() {
     do {
-        ds::list<std::string> mylist;
+        dsa::list<std::string> mylist;
         for (int i = 0; i < 5; ++i)
-            mylist.InsertBack("sex is good");
-        ds::list<std::string> mylist2(mylist);
+            mylist.add_back("sex is good");
+        dsa::list<std::string> mylist2(mylist);
         for (auto x : mylist2)
             std::cout << x << std::endl;
     } while (0);
 }
 
-void testInitList() {
+void test_init_list() {
     do {
-        ds::list<int> mylist =  { 0, 1, 2, 3, 4 };
+        dsa::list<int> mylist =  { 0, 1, 2, 3, 4 };
         for (int i = 5; i < 10; ++i)
-            mylist.InsertBack(i);
+            mylist.add_back(i);
         for (int x : mylist)
             std::cout << x << std::endl;
     } while (0);
 }
 
-void testInsertionOnEmptyList() {
+void test_add_on_empty_list() {
     if (true) {
         do {
-            ds::list<int> mylist;
-            mylist.InsertAt(89, mylist.begin());
-            mylist.InsertAt(89, mylist.begin());
-            mylist.InsertAt(89, mylist.begin());
+            dsa::list<int> mylist;
+            mylist.add_at(89, mylist.begin());
+            mylist.add_at(89, mylist.begin());
+            mylist.add_at(89, mylist.begin());
             for (int x : mylist)
                 std::cout << x << " ";
             std::cout << std::endl;
@@ -73,9 +73,9 @@ void testInsertionOnEmptyList() {
         } while (0);
     } else {
         do {
-            ds::list<int> mylist;
-            mylist.InsertFront(0);
-            mylist.InsertBack(1);
+            dsa::list<int> mylist;
+            mylist.add_front(0);
+            mylist.add_back(1);
             for (auto it = mylist.begin(); it != mylist.end(); ++it)
                 std::cout << *it << " ";
             std::cout << std::endl;
@@ -84,29 +84,30 @@ void testInsertionOnEmptyList() {
     }
 }
 
-void testInsertAt() {
+void test_add_at() {
     do {
-        ds::list<int> mylist;
+        dsa::list<int> mylist;
         for (int i = 0; i < 15; ++i)
-            mylist.InsertBack(i);
-        mylist.InsertAt(89, ++++++++++mylist.begin());
-        mylist.InsertAt(89, mylist.begin());
-        mylist.InsertAt(89, mylist.end());
+            mylist.add_back(i);
+        // mylist.delete_front();
+        mylist.add_at(89, ++++++++++mylist.begin());
+        mylist.add_at(89, mylist.begin());
+        mylist.add_at(89, mylist.end());
         for (int x : mylist)
             std::cout << x << " ";
         std::cout << std::endl;
-        // output: 89 1 2 3 4 89 5 6 7 8 9 10 11 12 13 14 89
+        // output: 89 0 1 2 3 4 89 5 6 7 8 9 10 11 12 13 14 89
     } while (0);
 }
 
-void testRemoveAt() {
+void test_delete_at() {
     do {
-        ds::list<int> mylist;
+        dsa::list<int> mylist;
         for (int i = 0; i < 15; ++i)
-            mylist.InsertBack(i);
-        mylist.RemoveAt(++++mylist.begin());
-        mylist.RemoveAt(mylist.begin());
-        mylist.RemoveAt(mylist.end());
+            mylist.add_back(i);
+        mylist.delete_at(++++mylist.begin());
+        mylist.delete_at(mylist.begin());
+        mylist.delete_at(--mylist.end());
         for (int x : mylist)
             std::cout << x << " ";
         std::cout << std::endl;
@@ -114,11 +115,11 @@ void testRemoveAt() {
     } while (0);
 }
 
-void testPrePostIncrementDecrement() {
+void test_it_inc_decr() {
     do {
-        ds::list<int> mylist;
+        dsa::list<int> mylist;
         for (int i = 0; i < 15; ++i)
-            mylist.InsertBack(i);
+            mylist.add_back(i);
         for (int x : mylist)
             std::cout << x << " ";
         std::cout << std::endl;

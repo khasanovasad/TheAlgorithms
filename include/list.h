@@ -1,17 +1,18 @@
-#ifndef LIST_H
-#define LIST_H
+#ifndef DSA_LIST_H
+#define DSA_LIST_H
 
-#include <iostream>
-#include <stdexcept>
 #include <initializer_list>
+#include <cassert>
 
-namespace ds {
+namespace dsa {
+
     template <typename T>
     class node {
+
     public:
         node() = default;
 
-        node(T& element_) {
+        node(const T& element_) {
             this->element_ = element_;
             this->next_ = nullptr;
             this->prev_ = nullptr;
@@ -24,6 +25,7 @@ namespace ds {
 
     template <typename T>
     class iterator {
+
     public:
         T& operator*() {
             return v_->element_;
@@ -76,20 +78,21 @@ namespace ds {
 
     template <typename T>
     class list {
+
     public:
         list() {
-            init();
+            init_head_tail();
         }
 
         list(std::initializer_list<T> i_list) {
-            init();
+            init_head_tail();
             for (T elem : i_list) {
                 add_back(elem);
             }
         }
 
         list(const list &list) {
-            init();
+            init_head_tail();
             for (auto x : list) {
                 add_back(x);
             }
@@ -98,70 +101,47 @@ namespace ds {
         ~list() {
             erase();
             delete head_;
-            delete trailer_;
+            delete tail_;
         }
 
         [[nodiscard]] bool is_empty() const {
-            if (head_->next_ == trailer_ && trailer_->prev_ == head_) {
+            if (head_->next_ == tail_ && tail_->prev_ == head_) {
                 return true;
             } else {
                 return false;
             }
         }
 
-        [[nodiscard]] size_t count() const {
-            size_t size = 0;
+        [[nodiscard]] std::size_t count() const {
+            std::size_t size = 0;
             node<T> *tmp = head_->next_;
-            while (tmp != trailer_) {
+            while (tmp != tail_) {
                 tmp = tmp->next_;
                 ++size;
             }
             return size;
         }
 
-        void add_front(T element_) {
-            auto* new_node = new node<T>(element_);
-            if (is_empty()) {
-                head_->next_ = new_node;
-                new_node->prev_ = head_;
-                trailer_->prev_ = new_node;
-                new_node->next_ = trailer_;
-            }
-            else {
-                new_node->prev_ = head_;
-                new_node->next_ = head_->next_;
-                head_->next_->prev_ = new_node;
-                head_->next_ = new_node;
-            }
+        void add_front(const T& to_be_added) {
+            add_at(to_be_added, begin());
         }
 
-        void add_back(T element_) {
-            auto* new_node = new node<T>(element_);
-            if (is_empty()) {
-                head_->next_ = new_node;
-                new_node->prev_ = head_;
-                trailer_->prev_ = new_node;
-                new_node->next_ = trailer_;
-            }
-            else {
-                new_node->next_ = trailer_;
-                new_node->prev_ = trailer_->prev_;
-                trailer_->prev_->next_ = new_node;
-                trailer_->prev_ = new_node;
-            }
+        void add_back(const T& to_be_added) {
+            add_at(to_be_added, end());
         }
 
-        void add_at(T element_, const iterator<T>& it) {
-            if (it == begin()) {
-                add_front(element_);
-            } else if (it == end()) {
-                add_back(element_);
-            } else {
-                auto* new_node = new node<T>(element_);
+        void add_at(const T& to_be_added, const iterator<T>& it) {
+            auto* new_node = new node<T>(to_be_added);
+            if (!is_empty()) {
                 it.v_->prev_->next_ = new_node;
                 new_node->prev_ = it.v_->prev_;
                 it.v_->prev_ = new_node;
                 new_node->next_ = it.v_;
+            } else  {
+                head_->next_ = new_node;
+                new_node->prev_ = head_;
+                tail_->prev_ = new_node;
+                new_node->next_ = tail_;
             }
         }
 
@@ -170,52 +150,42 @@ namespace ds {
         }
 
         T& get_back() const {
-            return trailer_->prev_->element_;
+            return tail_->prev_->element_;
         }
 
         T& get_at(const iterator<T>& it) const {
             return it.v_->element_;
         }
 
-        void delete_front() {
-            if (!is_empty()) {
-                node<T> *tmp = head_->next_;
-                head_->next_ = head_->next_->next_;
-                delete tmp;
-            } else {
-            }
+        T delete_front() {
+            return delete_at(begin());
         }
 
-        void delete_back() {
-            if (!is_empty()) {
-                node<T> *tmp = trailer_->prev_;
-                trailer_->prev_ = trailer_->prev_->prev_;
-                trailer_->prev_->next_ = trailer_;
-                delete tmp;
-            } else {
-            }
+        T delete_back() {
+            return delete_at(--end());
         }
 
-        void delete_at(const iterator<T>& it) {
-            if (it == begin()) {
-                delete_front();
-            } else if (it == end()){
-                delete_back();
-            } else {
-                it.v_->prev_->next_ = it.v_->next_;
-                it.v_->next_->prev_ = it.v_->prev_;
-                delete it.v_;
-            }
+        T delete_at(const iterator<T>& it) {
+            assert(!is_empty());
+            assert(it != end());
+
+            it.v_->prev_->next_ = it.v_->next_;
+            it.v_->next_->prev_ = it.v_->prev_;
+
+            T deleted = it.v_->element_;
+            delete it.v_;
+
+            return deleted;
         }
 
         void erase() {
             node<T> *tmp;
-            while (head_->next_ != trailer_) {
+            while (head_->next_ != tail_) {
                 tmp = head_->next_;
                 head_->next_ = tmp->next_;
                 delete tmp;
             }
-            trailer_->prev_ = head_;
+            tail_->prev_ = head_;
         }
 
         iterator<T> begin() const {
@@ -223,7 +193,7 @@ namespace ds {
         }
 
         iterator<T> end() const {
-            return iterator<T>(trailer_);
+            return iterator<T>(tail_);
         }
 
         /* NEED TO IMPLEMENT */
@@ -238,18 +208,18 @@ namespace ds {
         /* NEED TO IMPLEMENT */
 
     private:
-        void init() {
+        void init_head_tail() {
             head_ = new node<T>();
-            trailer_ = new node<T>();
-            head_->next_ = trailer_;
+            tail_ = new node<T>();
+            head_->next_ = tail_;
             head_->prev_ = nullptr;
-            trailer_->prev_ = head_;
-            trailer_->next_ = nullptr;
+            tail_->prev_ = head_;
+            tail_->next_ = nullptr;
         }
 
         node<T>* head_;
-        node<T>* trailer_;
+        node<T>* tail_;
     };
 }
 
-#endif // LIST_H
+#endif // DSA_LIST_H

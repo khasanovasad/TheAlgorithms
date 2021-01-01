@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(DSCpp CXX)
+project(dsa CXX)
 
 set(CMAKE_BUILD_TYPE Debug)
 # set(CMAKE_BUILD_TYPE RelWithDebInfo)
@@ -15,14 +15,11 @@ if (CMAKE_COMPILER_IS_GNUCC) # if gcc is in use
 endif()
 
 
-add_executable(DSCpp main.cpp
+add_executable(dsa main.cpp
     "include/list.h"
-    #"include/Stack.h"
-    #"include/Queue.h"
-    #"include/Deque.h"
-    #"include/Vector.h"
+    "include/vector.h"
 )
 
-target_link_libraries(DSCpp pthread)
+target_link_libraries(dsa pthread)
 
-target_include_directories(DSCpp PUBLIC "${PROJECT_SOURCE_DIR}/include")
+target_include_directories(dsa PUBLIC "${PROJECT_SOURCE_DIR}/include")
