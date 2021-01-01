@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(dsa CXX)
+project(TheAlgorithms CXX)
 
 set(CMAKE_BUILD_TYPE Debug)
 # set(CMAKE_BUILD_TYPE RelWithDebInfo)
@@ -14,12 +14,6 @@ if (CMAKE_COMPILER_IS_GNUCC) # if gcc is in use
     add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 endif()
 
-
-add_executable(dsa main.cpp
-    "include/list.h"
-    "include/vector.h"
-)
-
-target_link_libraries(dsa pthread)
-
-target_include_directories(dsa PUBLIC "${PROJECT_SOURCE_DIR}/include")
+add_subdirectory(data-structures)
+add_subdirectory(sorting)
+add_subdirectory(max-subarray)
