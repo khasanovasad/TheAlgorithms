@@ -8,12 +8,12 @@
 #include <string>
 #include <cassert>
 
-void print_time_elapsed()
+void PrintTimeElapsed()
 {
     return;
 }
 
-void print_arr(const int* const arr, const int size, const char* const end)
+void PrintArray(const int* const arr, const int size, const char* const end)
 {
     for (int i = 0; i < size; ++i)
     {
@@ -21,7 +21,7 @@ void print_arr(const int* const arr, const int size, const char* const end)
     }
 }
 
-void fill_in_random(int* const arr,const int size, const int base)
+void FillRandom(int* const arr,const int size, const int base)
 {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -32,7 +32,7 @@ void fill_in_random(int* const arr,const int size, const int base)
     }
 }
 
-void fill_in_decreasing(int* const arr, const int size)
+void FillDecreasing(int* const arr, const int size)
 {
     int j = size - 1;
     for (int i = 0; i < size; ++i)
@@ -41,7 +41,7 @@ void fill_in_decreasing(int* const arr, const int size)
     }
 }
 
-void fill_in_increasing(int* const arr, const int size)
+void FillIncreasing(int* const arr, const int size)
 {
     for (int i = 0; i < size; ++i)
     {
@@ -49,7 +49,19 @@ void fill_in_increasing(int* const arr, const int size)
     }
 }
 
-void assert_sort(int* const arr, const int size)
+bool IsSorted(const int* arr, int size)
+{
+    for (int i = 0; i < size - 1; ++i)
+    {
+        if (arr[i] > arr[i + 1])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+void AssertSort(const int* arr, int size)
 {
     for (int i = 0; i < size - 1; ++i)
     {

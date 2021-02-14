@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     int size = std::stoi(argv[1]);
     int *arr = new int[size];
 
-    fill_in_random(arr, size, 0);
+    FillRandom(arr, size, 0);
     // fill_in_increasing(arr, size);
     // fill_in_decreasing(arr, size);
 
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     BubbleSort(arr, size);
     auto stop = high_resolution_clock::now();
 
-    assert_sort(arr, size);
+    AssertSort(arr, size);
 
     auto duration = duration_cast<milliseconds>(stop - start);
     std::cout << "Time elapsed: " << (double)duration.count() / 1000 << "s" << std::endl;
