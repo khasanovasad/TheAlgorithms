@@ -1,18 +1,23 @@
-#include "utils.h"
+#include "Utils.hpp"
 
 using namespace std::chrono;
 
-void selection_sort(int* const arr, const int size) {
-    for (int i = 0; i < size - 1; ++i) {
-        int min_idx = i;
-        for (int j = i + 1; j < size; ++j)
-            if (arr[min_idx] > arr[j])
-                min_idx = j;
-        std::swap(arr[i], arr[min_idx]);
+void BubbleSort(int* const arr, const int size)
+{
+    for (int i = 0; i < size - 1; ++i)
+    {
+        for (int j = 0; j < size - i - 1; ++j)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                std::swap(arr[j], arr[j + 1]);
+            }
+        }
     }
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     int size = std::stoi(argv[1]);
     int *arr = new int[size];
 
@@ -21,7 +26,7 @@ int main(int argc, char *argv[]) {
     // fill_in_decreasing(arr, size);
 
     auto start = high_resolution_clock::now();
-    selection_sort(arr, size);
+    BubbleSort(arr, size);
     auto stop = high_resolution_clock::now();
 
     assert_sort(arr, size);

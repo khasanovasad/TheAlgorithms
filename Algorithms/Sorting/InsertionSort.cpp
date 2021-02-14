@@ -1,12 +1,15 @@
-#include "utils.h"
+#include "Utils.hpp"
 
 using namespace std::chrono;
 
-void insertion_sort(int* const arr, const int size) {
-    for (int i = 1; i < size; ++i) {
+void InsertionSort(int* const arr, const int size)
+{
+    for (int i = 1; i < size; ++i)
+    {
         int key = arr[i];
         int j = i - 1;
-        while (j >= 0 && key < arr[j]) {
+        while (j >= 0 && key < arr[j])
+        {
             arr[j + 1] = arr[j];
             --j;
         }
@@ -14,7 +17,8 @@ void insertion_sort(int* const arr, const int size) {
     }
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     int size = std::stoi(argv[1]);
     int *arr = new int[size];
 
@@ -23,7 +27,7 @@ int main(int argc, char *argv[]) {
     // fill_in_decreasing(arr, size);
 
     auto start = high_resolution_clock::now();
-    insertion_sort(arr, size);
+    InsertionSort(arr, size);
     auto stop = high_resolution_clock::now();
 
     assert_sort(arr, size);

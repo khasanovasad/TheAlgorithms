@@ -1,39 +1,52 @@
-#include "utils.h"
+#include "Utils.hpp"
 
 using namespace std::chrono;
 
-void max_heapify(int* const arr, const int size, const int i) {
+void MaxHeapify(int* const arr, const int size, const int i)
+{
     int left = 2 * i + 1;
     int right = 2 * i + 2;
 
     int largest = i;
 
     if (left < size && arr[largest] < arr[left])
+    {
         largest = left;
+    }
+
     if (right < size && arr[largest] < arr[right])
+    {
         largest = right;
+    }
 
-    if (largest != i) {
+    if (largest != i)
+    {
         std::swap(arr[i], arr[largest]);
-        max_heapify(arr, size, largest);
+        MaxHeapify(arr, size, largest);
     }
 }
 
-void build_max_heap(int* const arr, const int size) {
+void BuildMaxHeap(int* const arr, const int size)
+{
     for (int i = (size - 1) / 2; i >= 0; --i)
-        max_heapify(arr, size, i);
-}
-
-
-void heap_sort(int* const arr, const int size) {
-    build_max_heap(arr, size);
-    for (int i = size - 1; i >= 0; --i) {
-        std::swap(arr[0], arr[i]);
-        max_heapify(arr, i, 0);
+    {
+        MaxHeapify(arr, size, i);
     }
 }
 
-int main(int argc, char *argv[]) {
+
+void HeapSort(int* const arr, const int size)
+{
+    BuildMaxHeap(arr, size);
+    for (int i = size - 1; i >= 0; --i)
+    {
+        std::swap(arr[0], arr[i]);
+        MaxHeapify(arr, i, 0);
+    }
+}
+
+int main(int argc, char *argv[])
+{
     int size = std::stoi(argv[1]);
     int *arr = new int[size];
 
@@ -42,7 +55,7 @@ int main(int argc, char *argv[]) {
     // fill_in_decreasing(arr, size);
 
     auto start = high_resolution_clock::now();
-    heap_sort(arr, size);
+    HeapSort(arr, size);
     auto stop = high_resolution_clock::now();
 
     assert_sort(arr, size);
