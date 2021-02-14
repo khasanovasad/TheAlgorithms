@@ -2,23 +2,22 @@
 
 #include "Vector.hpp"
 #include "List.hpp"
+#include "Stack.hpp"
 
 int main(int args, char *argv[])
 {
-    DS::Vector<int> vect(0);
+    DS::Stack<std::string> stackk;
 
-    for (int i = 0; i < 20; ++i)
+    for (int i = 0; i < 10; ++i)
     {
-        vect.AddBack(i);
+        stackk.Push(std::to_string(i) + " FAAK ");
     }
 
-    vect.ShrinkToFit();
-
-    for (int i = 0; i < vect.Length(); ++i)
+    for (int i = 0; i < 10; ++i)
     {
-        std::cout << vect.At(i) << " ";
+        std::cout << stackk.Top() << std::endl;
+        stackk.Pop();
     }
 
-    std::cout << std::endl;
     return 0;
 }

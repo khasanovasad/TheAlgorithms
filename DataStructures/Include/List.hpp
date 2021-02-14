@@ -157,20 +157,20 @@ namespace DS
 
         void AddAt(const T& toBeAdded, const ListIterator<T>& it)
         {
-            auto* new_node = new ListNode<T>(toBeAdded);
+            auto* newNode = new ListNode<T>(toBeAdded);
             if (!IsEmpty())
             {
-                it._v->_prev->_next = new_node;
-                new_node->prev_ = it._v->_prev;
-                it._v->_prev = new_node;
-                new_node->next_ = it._v;
+                it._v->_prev->_next = newNode;
+                newNode->_prev = it._v->_prev;
+                it._v->_prev = newNode;
+                newNode->_next = it._v;
             }
             else
             {
-                _head->_next = new_node;
-                new_node->prev_ = _head;
-                _tail->_prev = new_node;
-                new_node->next_ = _tail;
+                _head->_next = newNode;
+                newNode->_prev = _head;
+                _tail->_prev = newNode;
+                newNode->_next = _tail;
             }
         }
 
