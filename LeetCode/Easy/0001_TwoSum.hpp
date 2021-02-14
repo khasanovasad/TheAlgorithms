@@ -3,7 +3,7 @@
 
 namespace LeetCode::Easy
 {
-    std::vector<int> TwoSum(std::vector<int>& nums, int target)
+    auto TwoSum(std::vector<int>& nums, int target) -> std::vector<int>
     {
         std::map<int, int> dict;
 

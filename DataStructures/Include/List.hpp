@@ -44,21 +44,21 @@ namespace DS
         }
 
         // pre increment
-        ListIterator& operator++()
+        auto operator++() -> ListIterator&
         {
             _v = _v->_next;
             return *this;
         }
 
         // pre decrement
-        ListIterator& operator--()
+        auto operator--() -> ListIterator&
         {
             _v = _v->_prev;
             return *this;
         }
 
         // post increment
-        ListIterator operator++(int)
+        auto operator++(int) -> ListIterator
         {
             auto tmp = ListIterator(this->_v);
             _v = _v->_next;
@@ -66,7 +66,7 @@ namespace DS
         }
 
         // post decrement
-        ListIterator operator--(int)
+        auto operator--(int) -> ListIterator
         {
             auto tmp = ListIterator(this->_v);
             _v = _v->_prev;
@@ -225,12 +225,12 @@ namespace DS
             _tail->_prev = _head;
         }
 
-        ListIterator<T> begin() const
+        auto begin() const -> ListIterator<T>
         {
             return ListIterator<T>(_head->_next);
         }
 
-        ListIterator<T> end() const
+        auto end() const -> ListIterator<T>
         {
             return ListIterator<T>(_tail);
         }

@@ -10,7 +10,7 @@ namespace LeetCode::Easy
          ListNode(int x, ListNode *next) : val(x), next(next) {}
     };
 
-    ListNode* DeleteDuplicates(ListNode* head)
+    auto DeleteDuplicates(ListNode* head) -> ListNode*
     {
         if (head == nullptr || head->next == nullptr)
         {
