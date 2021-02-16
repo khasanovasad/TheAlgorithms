@@ -1,9 +1,9 @@
 #include <iostream>
 
-#include "Vector.hpp"
 #include "List.hpp"
-#include "Stack.hpp"
 #include "Queue.hpp"
+#include "Stack.hpp"
+#include "Vector.hpp"
 
 int main(int args, char *argv[])
 {

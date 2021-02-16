@@ -2,7 +2,7 @@
 
 using namespace std::chrono;
 
-void InsertionSort(int* const arr, const int size)
+void InsertionSort(int *const arr, const int size)
 {
     for (int i = 1; i < size; ++i)
     {

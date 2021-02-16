@@ -35,4 +35,4 @@ namespace LeetCode::Easy
         }
         return result;
     }
-}
+} // namespace LeetCode::Easy

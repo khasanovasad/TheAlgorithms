@@ -2,7 +2,7 @@
 
 using namespace std::chrono;
 
-void SelectionSort(int* const arr, const int size)
+void SelectionSort(int *const arr, const int size)
 {
     for (int i = 0; i < size - 1; ++i)
     {

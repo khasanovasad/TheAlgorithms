@@ -7,15 +7,18 @@
 
 namespace DS
 {
-    template <typename T>
-    class Stack
+    template <typename T> class Stack
     {
-    public:
-        Stack() { }
+      public:
+        Stack()
+        {
+        }
 
-        ~Stack() { }
+        ~Stack()
+        {
+        }
 
-        T& Top()
+        T &Top()
         {
             return _data.Back();
         }
@@ -30,7 +33,7 @@ namespace DS
             return _data.Count();
         }
 
-        void Push(const T& toBePushed)
+        void Push(const T &toBePushed)
         {
             _data.AddBack(toBePushed);
         }
@@ -44,9 +47,9 @@ namespace DS
             _data.RemoveBack();
         }
 
-    private:
+      private:
         List<T> _data;
     };
-}
+} // namespace DS
 
 #endif // DS_STACK_H

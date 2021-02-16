@@ -1,24 +1,24 @@
-#include <vector>
 #include <algorithm>
+#include <vector>
 
 namespace LeetCode::Easy
 {
-    auto PlusOneRecursive(std::vector<int>& digits, int currIdx) -> std::vector<int>;
-    auto PlusOneIterative(std::vector<int>& digits) -> std::vector<int>;
+    auto PlusOneRecursive(std::vector<int> &digits, int currIdx) -> std::vector<int>;
+    auto PlusOneIterative(std::vector<int> &digits) -> std::vector<int>;
 
-    auto PlusOne(std::vector<int>& digits) -> std::vector<int>
+    auto PlusOne(std::vector<int> &digits) -> std::vector<int>
     {
         return PlusOneRecursive(digits, digits.size() - 1);
         // return PlusOneIterative(digits);
     }
 
-    auto PlusOneRecursive(std::vector<int>& digits, int currIdx) -> std::vector<int>
+    auto PlusOneRecursive(std::vector<int> &digits, int currIdx) -> std::vector<int>
     {
         if (currIdx < 0)
         {
             digits.insert(digits.begin(), 1);
             return digits;
-        } 
+        }
         else if (digits[currIdx] != 9)
         {
             ++digits[currIdx];
@@ -31,7 +31,7 @@ namespace LeetCode::Easy
         }
     }
 
-    auto PlusOneIterative(std::vector<int>& digits) -> std::vector<int>
+    auto PlusOneIterative(std::vector<int> &digits) -> std::vector<int>
     {
         bool flag = true;
 
@@ -55,4 +55,4 @@ namespace LeetCode::Easy
         }
         return digits;
     }
-}
+} // namespace LeetCode::Easy

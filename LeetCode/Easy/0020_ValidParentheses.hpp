@@ -1,17 +1,16 @@
-#include <string>
-#include <stack>
 #include <map>
+#include <stack>
+#include <string>
 
 namespace LeetCode::Easy
 {
     bool IsValid(std::string s)
     {
         std::stack<char> comeGo;
-        std::map<char, char> brackets
-        {
-            { ')', '(' },
-            { '}', '{' },
-            { ']', '[' },
+        std::map<char, char> brackets {
+            {')', '('},
+            {'}', '{'},
+            {']', '['},
         };
 
         for (char ch : s)
@@ -32,4 +31,4 @@ namespace LeetCode::Easy
 
         return comeGo.size() == 0;
     }
-}
+} // namespace LeetCode::Easy

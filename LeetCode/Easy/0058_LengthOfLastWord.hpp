@@ -9,14 +9,14 @@ namespace LeetCode::Easy
         {
             --walk;
         }
-        
+
         int count = 0;
-        while (walk >= 0  && s[walk] != ' ')
+        while (walk >= 0 && s[walk] != ' ')
         {
             ++count;
             --walk;
         }
-        
+
         return count;
     }
-}
+} // namespace LeetCode::Easy

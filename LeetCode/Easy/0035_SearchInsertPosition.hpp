@@ -3,7 +3,7 @@
 
 namespace LeetCode::Easy
 {
-    int SearchInsert(std::vector<int>& nums, int target)
+    int SearchInsert(std::vector<int> &nums, int target)
     {
         for (int i = 0; i < nums.size(); ++i)
         {
@@ -14,4 +14,4 @@ namespace LeetCode::Easy
         }
         return nums.size();
     }
-}
+} // namespace LeetCode::Easy

@@ -1,9 +1,9 @@
-#include <vector>
 #include <map>
+#include <vector>
 
 namespace LeetCode::Easy
 {
-    auto TwoSum(std::vector<int>& nums, int target) -> std::vector<int>
+    auto TwoSum(std::vector<int> &nums, int target) -> std::vector<int>
     {
         std::map<int, int> dict;
 
@@ -12,11 +12,11 @@ namespace LeetCode::Easy
             auto it = dict.find(nums.at(i));
             if (it != dict.end())
             {
-                return { dict[nums.at(i)], i };
+                return {dict[nums.at(i)], i};
             }
             dict.insert({target - nums.at(i), i});
         }
 
-        return { };
+        return {};
     }
-}
+} // namespace LeetCode::Easy

@@ -7,13 +7,16 @@
 
 namespace DS
 {
-    template <typename T>
-    class Queue
+    template <typename T> class Queue
     {
-    public:
-        Queue() { }
+      public:
+        Queue()
+        {
+        }
 
-        ~Queue() { }
+        ~Queue()
+        {
+        }
 
         bool IsEmpty()
         {
@@ -25,17 +28,17 @@ namespace DS
             return _data.Count();
         }
 
-        T& Front()
+        T &Front()
         {
             return _data.Front();
         }
 
-        T& Back()
+        T &Back()
         {
             return _data.Back();
         }
 
-        void Push(const T& toBePushed)
+        void Push(const T &toBePushed)
         {
             _data.AddBack(toBePushed);
         }
@@ -49,9 +52,9 @@ namespace DS
             _data.RemoveFront();
         }
 
-    private:
+      private:
         List<T> _data;
     };
-}    
+} // namespace DS
 
 #endif // DS_QUEUE_H

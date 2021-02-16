@@ -2,7 +2,7 @@
 
 using namespace std::chrono;
 
-void InsertionSort(int* const arr, const int low, const int high)
+void InsertionSort(int *const arr, const int low, const int high)
 {
     for (int i = low + 1; i < high; ++i)
     {
@@ -17,7 +17,7 @@ void InsertionSort(int* const arr, const int low, const int high)
     }
 }
 
-void Merge(int* const arr, const int low, const int middle, const int high)
+void Merge(int *const arr, const int low, const int middle, const int high)
 {
     int n1 = (middle - low) + 1;
     int n2 = high - middle;
@@ -60,7 +60,7 @@ void Merge(int* const arr, const int low, const int middle, const int high)
     delete[] R;
 }
 
-void MergeInsertionSort(int* const arr, const int low, const int high)
+void MergeInsertionSort(int *const arr, const int low, const int high)
 {
     if ((high - low) <= 50)
     {

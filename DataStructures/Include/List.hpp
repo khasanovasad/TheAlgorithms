@@ -1,18 +1,17 @@
 #ifndef DS_LIST_H
 #define DS_LIST_H
 
-#include <initializer_list>
 #include <cassert>
+#include <initializer_list>
 
 namespace DS
 {
-    template <typename T>
-    class ListNode
+    template <typename T> class ListNode
     {
-    public:
+      public:
         ListNode() = default;
 
-        ListNode(const T& element_)
+        ListNode(const T &element_)
         {
             this->_element = element_;
             this->_next = nullptr;
@@ -20,38 +19,37 @@ namespace DS
         }
 
         T _element;
-        ListNode<T>* _next = nullptr;
-        ListNode<T>* _prev = nullptr;
+        ListNode<T> *_next = nullptr;
+        ListNode<T> *_prev = nullptr;
     };
 
-    template <typename T>
-    class ListIterator
+    template <typename T> class ListIterator
     {
-    public:
-        T& operator*()
+      public:
+        T &operator*()
         {
             return _v->_element;
         }
 
-        bool operator==(const ListIterator& it) const
+        bool operator==(const ListIterator &it) const
         {
             return _v == it._v;
         }
 
-        bool operator!=(const ListIterator& it) const
+        bool operator!=(const ListIterator &it) const
         {
             return _v != it._v;
         }
 
         // pre increment
-        auto operator++() -> ListIterator&
+        auto operator++() -> ListIterator &
         {
             _v = _v->_next;
             return *this;
         }
 
         // pre decrement
-        auto operator--() -> ListIterator&
+        auto operator--() -> ListIterator &
         {
             _v = _v->_prev;
             return *this;
@@ -73,10 +71,9 @@ namespace DS
             return tmp;
         }
 
-        template <typename TU>
-        friend class List;
+        template <typename TU> friend class List;
 
-    private:
+      private:
         explicit ListIterator(ListNode<T> *node)
         {
             _v = node;
@@ -85,10 +82,9 @@ namespace DS
         ListNode<T> *_v;
     };
 
-    template <typename T>
-    class List
+    template <typename T> class List
     {
-    public:
+      public:
         List()
         {
             InitHeadTail();
@@ -119,8 +115,7 @@ namespace DS
             delete _tail;
         }
 
-        [[nodiscard]]
-        bool IsEmpty() const
+        [[nodiscard]] bool IsEmpty() const
         {
             if (_head->_next == _tail && _tail->_prev == _head)
             {
@@ -132,8 +127,7 @@ namespace DS
             }
         }
 
-        [[nodiscard]]
-        std::size_t Count() const
+        [[nodiscard]] std::size_t Count() const
         {
             std::size_t size = 0;
             ListNode<T> *tmp = _head->_next;
@@ -145,19 +139,19 @@ namespace DS
             return size;
         }
 
-        void AddFront(const T& toBeAdded)
+        void AddFront(const T &toBeAdded)
         {
             AddAt(toBeAdded, begin());
         }
 
-        void AddBack(const T& toBeAdded)
+        void AddBack(const T &toBeAdded)
         {
             AddAt(toBeAdded, end());
         }
 
-        void AddAt(const T& toBeAdded, const ListIterator<T>& it)
+        void AddAt(const T &toBeAdded, const ListIterator<T> &it)
         {
-            auto* newNode = new ListNode<T>(toBeAdded);
+            auto *newNode = new ListNode<T>(toBeAdded);
             if (!IsEmpty())
             {
                 it._v->_prev->_next = newNode;
@@ -174,17 +168,17 @@ namespace DS
             }
         }
 
-        T& Front() const
+        T &Front() const
         {
             return _head->_next->_element;
         }
 
-        T& Back() const
+        T &Back() const
         {
             return _tail->_prev->_element;
         }
 
-        T& At(const ListIterator<T>& it) const
+        T &At(const ListIterator<T> &it) const
         {
             return it._v->_element;
         }
@@ -199,7 +193,7 @@ namespace DS
             return RemoveAt(--end());
         }
 
-        T RemoveAt(const ListIterator<T>& it)
+        T RemoveAt(const ListIterator<T> &it)
         {
             assert(!IsEmpty());
             assert(it != end());
@@ -246,7 +240,7 @@ namespace DS
         void crend() const;
         /* NEED TO IMPLEMENT */
 
-    private:
+      private:
         void InitHeadTail()
         {
             _head = new ListNode<T>();
@@ -257,9 +251,9 @@ namespace DS
             _tail->_next = nullptr;
         }
 
-        ListNode<T>* _head;
-        ListNode<T>* _tail;
+        ListNode<T> *_head;
+        ListNode<T> *_tail;
     };
-}
+} // namespace DS
 
 #endif // DS_LIST_H

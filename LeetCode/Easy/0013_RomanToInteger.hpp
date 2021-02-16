@@ -1,20 +1,13 @@
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
 
 namespace LeetCode::Easy
 {
     int RomanToInt(std::string s)
     {
-        std::map<char, int> values
-        {
-            { 'I', 1 },
-            { 'V', 5 },
-            { 'X', 10 },
-            { 'L', 50 },
-            { 'C', 100 },
-            { 'D', 500 },
-            { 'M', 1000 },
+        std::map<char, int> values {
+            {'I', 1}, {'V', 5}, {'X', 10}, {'L', 50}, {'C', 100}, {'D', 500}, {'M', 1000},
         };
 
         int result = 0, i;
@@ -38,4 +31,4 @@ namespace LeetCode::Easy
 
         return result;
     }
-}
+} // namespace LeetCode::Easy

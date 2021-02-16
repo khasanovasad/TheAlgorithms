@@ -5,10 +5,9 @@
 
 namespace DS
 {
-    template <typename T>
-    class Vector
+    template <typename T> class Vector
     {
-    public:
+      public:
         Vector(std::size_t initCapacity)
         {
             if (initCapacity == 0)
@@ -21,7 +20,7 @@ namespace DS
             _length = 0;
         }
 
-        Vector(std::size_t initCapacity, const T& defValue)
+        Vector(std::size_t initCapacity, const T &defValue)
         {
             if (initCapacity == 0)
             {
@@ -59,17 +58,17 @@ namespace DS
             return _capacity;
         }
 
-        void AddBack(const T& toBeAdded)
+        void AddBack(const T &toBeAdded)
         {
             AddAt(toBeAdded, Length());
         }
 
-        void AddFront(const T& toBeAdded)
+        void AddFront(const T &toBeAdded)
         {
             AddAt(toBeAdded, 0);
         }
 
-        void AddAt(const T& toBeAdded, std::size_t index)
+        void AddAt(const T &toBeAdded, std::size_t index)
         {
             assert(index < Length() + 1);
 
@@ -82,17 +81,17 @@ namespace DS
             ++_length;
         }
 
-        T& Back() const
+        T &Back() const
         {
             return At(Length() - 1);
         }
 
-        T& Front() const
+        T &Front() const
         {
             return At(0);
         }
 
-        T& At(std::size_t index) const
+        T &At(std::size_t index) const
         {
             assert(Length() != 0);
             assert(index < Length());
@@ -125,7 +124,7 @@ namespace DS
         void ShrinkToFit()
         {
             _capacity = Length();
-            T* tmp = new T[Capacity()];
+            T *tmp = new T[Capacity()];
 
             for (std::size_t i = 0; i < Length(); ++i)
             {
@@ -136,8 +135,8 @@ namespace DS
             _data = tmp;
         }
 
-    private:
-        T* _data = nullptr;
+      private:
+        T *_data = nullptr;
         std::size_t _length;
         std::size_t _capacity;
 
@@ -145,7 +144,7 @@ namespace DS
         {
             if (Length() == Capacity())
             {
-                T* tmp = new T[Capacity() + Capacity() / 2];
+                T *tmp = new T[Capacity() + Capacity() / 2];
 
                 for (std::size_t i = 0; i < Length(); ++i)
                 {
@@ -158,6 +157,6 @@ namespace DS
             }
         }
     };
-}
+} // namespace DS
 
 #endif // DS_VECTOR_H

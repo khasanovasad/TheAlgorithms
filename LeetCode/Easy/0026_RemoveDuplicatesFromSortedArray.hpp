@@ -2,7 +2,7 @@
 
 namespace LeetCode::Easy
 {
-    int RemoveDuplicates(std::vector<int>& nums)
+    int RemoveDuplicates(std::vector<int> &nums)
     {
         if (nums.size() == 0)
         {
@@ -21,4 +21,4 @@ namespace LeetCode::Easy
 
         return i + 1;
     }
-}
+} // namespace LeetCode::Easy
