@@ -6,7 +6,8 @@
 
 namespace DS
 {
-    template <typename T> class ListNode
+    template <typename T>
+    class ListNode
     {
       public:
         ListNode() = default;
@@ -23,7 +24,8 @@ namespace DS
         ListNode<T> *_prev = nullptr;
     };
 
-    template <typename T> class ListIterator
+    template <typename T>
+    class ListIterator
     {
       public:
         T &operator*()
@@ -71,7 +73,8 @@ namespace DS
             return tmp;
         }
 
-        template <typename TU> friend class List;
+        template <typename TU>
+        friend class List;
 
       private:
         explicit ListIterator(ListNode<T> *node)
@@ -82,7 +85,8 @@ namespace DS
         ListNode<T> *_v;
     };
 
-    template <typename T> class List
+    template <typename T>
+    class List
     {
       public:
         List()

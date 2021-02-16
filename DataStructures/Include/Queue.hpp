@@ -7,7 +7,8 @@
 
 namespace DS
 {
-    template <typename T> class Queue
+    template <typename T>
+    class Queue
     {
       public:
         Queue()

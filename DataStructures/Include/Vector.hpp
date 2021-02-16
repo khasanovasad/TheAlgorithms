@@ -5,7 +5,8 @@
 
 namespace DS
 {
-    template <typename T> class Vector
+    template <typename T>
+    class Vector
     {
       public:
         Vector(std::size_t initCapacity)

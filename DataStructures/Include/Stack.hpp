@@ -7,7 +7,8 @@
 
 namespace DS
 {
-    template <typename T> class Stack
+    template <typename T>
+    class Stack
     {
       public:
         Stack()
