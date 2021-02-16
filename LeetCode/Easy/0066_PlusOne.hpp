@@ -3,16 +3,16 @@
 
 namespace LeetCode::Easy
 {
-    auto PlusOneRecursive(std::vector<int> &digits, int currIdx) -> std::vector<int>;
-    auto PlusOneIterative(std::vector<int> &digits) -> std::vector<int>;
+    auto PlusOneRecursive(std::vector<int>& digits, int currIdx) -> std::vector<int>;
+    auto PlusOneIterative(std::vector<int>& digits) -> std::vector<int>;
 
-    auto PlusOne(std::vector<int> &digits) -> std::vector<int>
+    auto PlusOne(std::vector<int>& digits) -> std::vector<int>
     {
         return PlusOneRecursive(digits, digits.size() - 1);
         // return PlusOneIterative(digits);
     }
 
-    auto PlusOneRecursive(std::vector<int> &digits, int currIdx) -> std::vector<int>
+    auto PlusOneRecursive(std::vector<int>& digits, int currIdx) -> std::vector<int>
     {
         if (currIdx < 0)
         {
@@ -31,7 +31,7 @@ namespace LeetCode::Easy
         }
     }
 
-    auto PlusOneIterative(std::vector<int> &digits) -> std::vector<int>
+    auto PlusOneIterative(std::vector<int>& digits) -> std::vector<int>
     {
         bool flag = true;
 

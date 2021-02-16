@@ -2,12 +2,12 @@
 
 using namespace std::chrono;
 
-void Merge(int *const arr, int low, int middle, int high)
+void Merge(int* const arr, int low, int middle, int high)
 {
     int n1 = middle - low + 1;
     int n2 = high - middle;
-    int *L = new int[n1];
-    int *R = new int[n2];
+    int* L = new int[n1];
+    int* R = new int[n2];
 
     // separate sorted slices of array
     // into left and right arrays
@@ -49,7 +49,7 @@ void Merge(int *const arr, int low, int middle, int high)
     delete[] R;
 }
 
-void MergeSort(int *const arr, int low, int high)
+void MergeSort(int* const arr, int low, int high)
 {
     if (low < high)
     {
@@ -60,10 +60,10 @@ void MergeSort(int *const arr, int low, int high)
     }
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     int size = std::stoi(argv[1]);
-    int *arr = new int[size];
+    int* arr = new int[size];
 
     FillRandom(arr, size, 0);
     // fill_in_increasing(arr, size);

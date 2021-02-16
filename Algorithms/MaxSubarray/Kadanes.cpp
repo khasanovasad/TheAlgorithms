@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 
-int Kadanes(std::vector<int> &arr);
+int Kadanes(std::vector<int>& arr);
 
 int main()
 {
@@ -11,7 +11,7 @@ int main()
     return 0;
 }
 
-int Kadanes(std::vector<int> &arr)
+int Kadanes(std::vector<int>& arr)
 {
     int best_sum = 0;
     int curr_sum = 0;

@@ -2,7 +2,7 @@
 
 using namespace std::chrono;
 
-void InsertionSort(int *const arr, const int low, const int high)
+void InsertionSort(int* const arr, const int low, const int high)
 {
     for (int i = low + 1; i < high; ++i)
     {
@@ -17,13 +17,13 @@ void InsertionSort(int *const arr, const int low, const int high)
     }
 }
 
-void Merge(int *const arr, const int low, const int middle, const int high)
+void Merge(int* const arr, const int low, const int middle, const int high)
 {
     int n1 = (middle - low) + 1;
     int n2 = high - middle;
 
-    int *L = new int[n1];
-    int *R = new int[n2];
+    int* L = new int[n1];
+    int* R = new int[n2];
 
     for (int i = 0; i < n1; ++i)
     {
@@ -60,7 +60,7 @@ void Merge(int *const arr, const int low, const int middle, const int high)
     delete[] R;
 }
 
-void MergeInsertionSort(int *const arr, const int low, const int high)
+void MergeInsertionSort(int* const arr, const int low, const int high)
 {
     if ((high - low) <= 50)
     {
@@ -78,10 +78,10 @@ void MergeInsertionSort(int *const arr, const int low, const int high)
     }
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     int size = std::stoi(argv[1]);
-    int *arr = new int[size];
+    int* arr = new int[size];
 
     FillRandom(arr, size, 0);
     // fill_in_increasing(arr, size);

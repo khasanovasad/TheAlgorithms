@@ -5,8 +5,8 @@
 
 #define N 16
 
-int FindMaxCrossingSubarray(std::vector<int> &arr, int low, int mid, int high);
-int FindMaxSubarray(std::vector<int> &arr, int low, int high);
+int FindMaxCrossingSubarray(std::vector<int>& arr, int low, int mid, int high);
+int FindMaxSubarray(std::vector<int>& arr, int low, int high);
 
 int main()
 {
@@ -21,7 +21,7 @@ int Max3(int a, int b, int c)
     return a_or_b > c ? a_or_b : c;
 }
 
-int FindMaxCrossingSubarray(std::vector<int> &arr, int low, int mid, int high)
+int FindMaxCrossingSubarray(std::vector<int>& arr, int low, int mid, int high)
 {
     int left_sum = INT_MIN, right_sum = INT_MIN;
     int sum;
@@ -48,7 +48,7 @@ int FindMaxCrossingSubarray(std::vector<int> &arr, int low, int mid, int high)
     return Max3(left_sum, right_sum, left_sum + right_sum);
 }
 
-int FindMaxSubarray(std::vector<int> &arr, int low, int high)
+int FindMaxSubarray(std::vector<int>& arr, int low, int high)
 {
     if (low == high)
     {

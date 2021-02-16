@@ -13,7 +13,7 @@ void PrintTimeElapsed()
     return;
 }
 
-void PrintArray(const int *const arr, const int size, const char *const end)
+void PrintArray(const int* const arr, const int size, const char* const end)
 {
     for (int i = 0; i < size; ++i)
     {
@@ -21,7 +21,7 @@ void PrintArray(const int *const arr, const int size, const char *const end)
     }
 }
 
-void FillRandom(int *const arr, const int size, const int base)
+void FillRandom(int* const arr, const int size, const int base)
 {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -32,7 +32,7 @@ void FillRandom(int *const arr, const int size, const int base)
     }
 }
 
-void FillDecreasing(int *const arr, const int size)
+void FillDecreasing(int* const arr, const int size)
 {
     int j = size - 1;
     for (int i = 0; i < size; ++i)
@@ -41,7 +41,7 @@ void FillDecreasing(int *const arr, const int size)
     }
 }
 
-void FillIncreasing(int *const arr, const int size)
+void FillIncreasing(int* const arr, const int size)
 {
     for (int i = 0; i < size; ++i)
     {
@@ -49,7 +49,7 @@ void FillIncreasing(int *const arr, const int size)
     }
 }
 
-bool IsSorted(const int *arr, int size)
+bool IsSorted(const int* arr, int size)
 {
     for (int i = 0; i < size - 1; ++i)
     {
@@ -61,7 +61,7 @@ bool IsSorted(const int *arr, int size)
     return true;
 }
 
-void AssertSort(const int *arr, int size)
+void AssertSort(const int* arr, int size)
 {
     for (int i = 0; i < size - 1; ++i)
     {

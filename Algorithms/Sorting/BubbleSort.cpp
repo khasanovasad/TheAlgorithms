@@ -2,7 +2,7 @@
 
 using namespace std::chrono;
 
-void BubbleSort(int *const arr, const int size)
+void BubbleSort(int* const arr, const int size)
 {
     for (int i = 0; i < size - 1; ++i)
     {
@@ -16,10 +16,10 @@ void BubbleSort(int *const arr, const int size)
     }
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     int size = std::stoi(argv[1]);
-    int *arr = new int[size];
+    int* arr = new int[size];
 
     FillRandom(arr, size, 0);
     // fill_in_increasing(arr, size);

@@ -2,7 +2,7 @@
 
 using namespace std::chrono;
 
-void MaxHeapify(int *const arr, const int size, const int i)
+void MaxHeapify(int* const arr, const int size, const int i)
 {
     int left = 2 * i + 1;
     int right = 2 * i + 2;
@@ -26,7 +26,7 @@ void MaxHeapify(int *const arr, const int size, const int i)
     }
 }
 
-void BuildMaxHeap(int *const arr, const int size)
+void BuildMaxHeap(int* const arr, const int size)
 {
     for (int i = (size - 1) / 2; i >= 0; --i)
     {
@@ -34,7 +34,7 @@ void BuildMaxHeap(int *const arr, const int size)
     }
 }
 
-void HeapSort(int *const arr, const int size)
+void HeapSort(int* const arr, const int size)
 {
     BuildMaxHeap(arr, size);
     for (int i = size - 1; i >= 0; --i)
@@ -44,10 +44,10 @@ void HeapSort(int *const arr, const int size)
     }
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     int size = std::stoi(argv[1]);
-    int *arr = new int[size];
+    int* arr = new int[size];
 
     FillRandom(arr, size, 0);
     // fill_in_increasing(arr, size);

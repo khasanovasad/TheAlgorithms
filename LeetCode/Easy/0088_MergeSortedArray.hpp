@@ -2,7 +2,7 @@
 
 namespace LeetCode::Easy
 {
-    void Merge(std::vector<int> &nums1, int m, std::vector<int> &nums2, int n)
+    void Merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n)
     {
         std::vector<int> copy1(nums1);
 

@@ -2,7 +2,7 @@
 
 using namespace std::chrono;
 
-void InsertionSort(int *const arr, const int size)
+void InsertionSort(int* const arr, const int size)
 {
     for (int i = 1; i < size; ++i)
     {
@@ -17,10 +17,10 @@ void InsertionSort(int *const arr, const int size)
     }
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     int size = std::stoi(argv[1]);
-    int *arr = new int[size];
+    int* arr = new int[size];
 
     FillRandom(arr, size, 0);
     // fill_in_increasing(arr, size);

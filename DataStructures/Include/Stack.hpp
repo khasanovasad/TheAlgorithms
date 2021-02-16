@@ -19,7 +19,7 @@ namespace DS
         {
         }
 
-        T &Top()
+        T& Top()
         {
             return _data.Back();
         }
@@ -34,7 +34,7 @@ namespace DS
             return _data.Count();
         }
 
-        void Push(const T &toBePushed)
+        void Push(const T& toBePushed)
         {
             _data.AddBack(toBePushed);
         }

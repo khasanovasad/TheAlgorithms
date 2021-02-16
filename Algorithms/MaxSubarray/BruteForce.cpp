@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-int MaxSubarray(std::vector<int> &arr);
+int MaxSubarray(std::vector<int>& arr);
 
 int main()
 {
@@ -10,7 +10,7 @@ int main()
     return 0;
 }
 
-int MaxSubarray(std::vector<int> &arr)
+int MaxSubarray(std::vector<int>& arr)
 {
     int best_sum = 0;
     int curr_sum = 0;

@@ -29,17 +29,17 @@ namespace DS
             return _data.Count();
         }
 
-        T &Front()
+        T& Front()
         {
             return _data.Front();
         }
 
-        T &Back()
+        T& Back()
         {
             return _data.Back();
         }
 
-        void Push(const T &toBePushed)
+        void Push(const T& toBePushed)
         {
             _data.AddBack(toBePushed);
         }

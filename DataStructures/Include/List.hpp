@@ -12,7 +12,7 @@ namespace DS
       public:
         ListNode() = default;
 
-        ListNode(const T &element_)
+        ListNode(const T& element_)
         {
             this->_element = element_;
             this->_next = nullptr;
@@ -20,38 +20,38 @@ namespace DS
         }
 
         T _element;
-        ListNode<T> *_next = nullptr;
-        ListNode<T> *_prev = nullptr;
+        ListNode<T>* _next = nullptr;
+        ListNode<T>* _prev = nullptr;
     };
 
     template <typename T>
     class ListIterator
     {
       public:
-        T &operator*()
+        T& operator*()
         {
             return _v->_element;
         }
 
-        bool operator==(const ListIterator &it) const
+        bool operator==(const ListIterator& it) const
         {
             return _v == it._v;
         }
 
-        bool operator!=(const ListIterator &it) const
+        bool operator!=(const ListIterator& it) const
         {
             return _v != it._v;
         }
 
         // pre increment
-        auto operator++() -> ListIterator &
+        auto operator++() -> ListIterator&
         {
             _v = _v->_next;
             return *this;
         }
 
         // pre decrement
-        auto operator--() -> ListIterator &
+        auto operator--() -> ListIterator&
         {
             _v = _v->_prev;
             return *this;
@@ -77,12 +77,12 @@ namespace DS
         friend class List;
 
       private:
-        explicit ListIterator(ListNode<T> *node)
+        explicit ListIterator(ListNode<T>* node)
         {
             _v = node;
         }
 
-        ListNode<T> *_v;
+        ListNode<T>* _v;
     };
 
     template <typename T>
@@ -103,7 +103,7 @@ namespace DS
             }
         }
 
-        List(const List &list)
+        List(const List& list)
         {
             InitHeadTail();
             for (auto x : list)
@@ -134,7 +134,7 @@ namespace DS
         [[nodiscard]] std::size_t Count() const
         {
             std::size_t size = 0;
-            ListNode<T> *tmp = _head->_next;
+            ListNode<T>* tmp = _head->_next;
             while (tmp != _tail)
             {
                 tmp = tmp->_next;
@@ -143,19 +143,19 @@ namespace DS
             return size;
         }
 
-        void AddFront(const T &toBeAdded)
+        void AddFront(const T& toBeAdded)
         {
             AddAt(toBeAdded, begin());
         }
 
-        void AddBack(const T &toBeAdded)
+        void AddBack(const T& toBeAdded)
         {
             AddAt(toBeAdded, end());
         }
 
-        void AddAt(const T &toBeAdded, const ListIterator<T> &it)
+        void AddAt(const T& toBeAdded, const ListIterator<T>& it)
         {
-            auto *newNode = new ListNode<T>(toBeAdded);
+            auto* newNode = new ListNode<T>(toBeAdded);
             if (!IsEmpty())
             {
                 it._v->_prev->_next = newNode;
@@ -172,17 +172,17 @@ namespace DS
             }
         }
 
-        T &Front() const
+        T& Front() const
         {
             return _head->_next->_element;
         }
 
-        T &Back() const
+        T& Back() const
         {
             return _tail->_prev->_element;
         }
 
-        T &At(const ListIterator<T> &it) const
+        T& At(const ListIterator<T>& it) const
         {
             return it._v->_element;
         }
@@ -197,7 +197,7 @@ namespace DS
             return RemoveAt(--end());
         }
 
-        T RemoveAt(const ListIterator<T> &it)
+        T RemoveAt(const ListIterator<T>& it)
         {
             assert(!IsEmpty());
             assert(it != end());
@@ -213,7 +213,7 @@ namespace DS
 
         void Erase()
         {
-            ListNode<T> *tmp;
+            ListNode<T>* tmp;
             while (_head->_next != _tail)
             {
                 tmp = _head->_next;
@@ -255,8 +255,8 @@ namespace DS
             _tail->_next = nullptr;
         }
 
-        ListNode<T> *_head;
-        ListNode<T> *_tail;
+        ListNode<T>* _head;
+        ListNode<T>* _tail;
     };
 } // namespace DS
 

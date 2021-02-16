@@ -3,7 +3,7 @@
 
 namespace LeetCode::Easy
 {
-    std::string LongestCommonPrefix(std::vector<std::string> &strs)
+    std::string LongestCommonPrefix(std::vector<std::string>& strs)
     {
         if (strs.size() == 0)
         {

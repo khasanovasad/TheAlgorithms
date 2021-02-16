@@ -5,7 +5,7 @@
 #include "Stack.hpp"
 #include "Vector.hpp"
 
-int main(int args, char *argv[])
+int main(int args, char* argv[])
 {
     DS::Queue<std::string> que;
 

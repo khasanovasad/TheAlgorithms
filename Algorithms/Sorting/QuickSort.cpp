@@ -2,7 +2,7 @@
 
 using namespace std::chrono;
 
-int Partition(int *const arr, int low, int high)
+int Partition(int* const arr, int low, int high)
 {
     int pivot = arr[high];
     int i = low - 1;
@@ -19,7 +19,7 @@ int Partition(int *const arr, int low, int high)
     return i + 1;
 }
 
-void QuickSort(int *const arr, int low, int high)
+void QuickSort(int* const arr, int low, int high)
 {
     if (low < high)
     {
@@ -31,10 +31,10 @@ void QuickSort(int *const arr, int low, int high)
     }
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     int size = std::stoi(argv[1]);
-    int *arr = new int[size];
+    int* arr = new int[size];
 
     FillRandom(arr, size, 0);
     // fill_in_increasing(arr, size);
