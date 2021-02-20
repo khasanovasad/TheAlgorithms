@@ -10,7 +10,7 @@ namespace DS
     template <typename T>
     class Queue
     {
-      public:
+    public:
         Queue()
         {
         }
@@ -53,7 +53,7 @@ namespace DS
             _data.RemoveFront();
         }
 
-      private:
+    private:
         List<T> _data;
     };
 } // namespace DS

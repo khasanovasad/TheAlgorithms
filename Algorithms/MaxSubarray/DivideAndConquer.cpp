@@ -10,7 +10,7 @@ int FindMaxSubarray(std::vector<int>& arr, int low, int high);
 
 int main()
 {
-    std::vector<int> arr = {13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7};
+    std::vector<int> arr = { 13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7 };
     std::cout << FindMaxSubarray(arr, 0, arr.size() - 1) << std::endl;
     return 0;
 }
@@ -58,6 +58,6 @@ int FindMaxSubarray(std::vector<int>& arr, int low, int high)
     {
         int mid = (low + high) / 2;
         return Max3(FindMaxSubarray(arr, low, mid), FindMaxSubarray(arr, mid + 1, high),
-                    FindMaxCrossingSubarray(arr, low, mid, high));
+            FindMaxCrossingSubarray(arr, low, mid, high));
     }
 }

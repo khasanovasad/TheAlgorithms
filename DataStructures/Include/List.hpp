@@ -9,7 +9,7 @@ namespace DS
     template <typename T>
     class ListNode
     {
-      public:
+    public:
         ListNode() = default;
 
         ListNode(const T& element_)
@@ -27,7 +27,7 @@ namespace DS
     template <typename T>
     class ListIterator
     {
-      public:
+    public:
         T& operator*()
         {
             return _v->_element;
@@ -76,7 +76,7 @@ namespace DS
         template <typename TU>
         friend class List;
 
-      private:
+    private:
         explicit ListIterator(ListNode<T>* node)
         {
             _v = node;
@@ -88,7 +88,7 @@ namespace DS
     template <typename T>
     class List
     {
-      public:
+    public:
         List()
         {
             InitHeadTail();
@@ -244,7 +244,7 @@ namespace DS
         void crend() const;
         /* NEED TO IMPLEMENT */
 
-      private:
+    private:
         void InitHeadTail()
         {
             _head = new ListNode<T>();

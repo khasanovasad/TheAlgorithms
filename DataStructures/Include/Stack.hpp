@@ -10,7 +10,7 @@ namespace DS
     template <typename T>
     class Stack
     {
-      public:
+    public:
         Stack()
         {
         }
@@ -48,7 +48,7 @@ namespace DS
             _data.RemoveBack();
         }
 
-      private:
+    private:
         List<T> _data;
     };
 } // namespace DS

@@ -8,7 +8,7 @@ namespace DS
     template <typename T>
     class Vector
     {
-      public:
+    public:
         Vector(std::size_t initCapacity)
         {
             if (initCapacity == 0)
@@ -136,7 +136,7 @@ namespace DS
             _data = tmp;
         }
 
-      private:
+    private:
         T* _data = nullptr;
         std::size_t _length;
         std::size_t _capacity;

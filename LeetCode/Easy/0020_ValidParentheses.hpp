@@ -8,9 +8,9 @@ namespace LeetCode::Easy
     {
         std::stack<char> comeGo;
         std::map<char, char> brackets {
-            {')', '('},
-            {'}', '{'},
-            {']', '['},
+            { ')', '(' },
+            { '}', '{' },
+            { ']', '[' },
         };
 
         for (char ch : s)
