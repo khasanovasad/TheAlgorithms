@@ -7,7 +7,8 @@ namespace LeetCode::Easy
     bool IsValid(std::string s)
     {
         std::stack<char> comeGo;
-        std::map<char, char> brackets {
+        std::map<char, char> brackets
+        {
             { ')', '(' },
             { '}', '{' },
             { ']', '[' },

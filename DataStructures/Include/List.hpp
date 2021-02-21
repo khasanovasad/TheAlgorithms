@@ -119,7 +119,8 @@ namespace DS
             delete _tail;
         }
 
-        [[nodiscard]] bool IsEmpty() const
+        [[nodiscard]]
+        bool IsEmpty() const
         {
             if (_head->_next == _tail && _tail->_prev == _head)
             {
@@ -131,7 +132,8 @@ namespace DS
             }
         }
 
-        [[nodiscard]] std::size_t Count() const
+        [[nodiscard]]
+        std::size_t Count() const
         {
             std::size_t size = 0;
             ListNode<T>* tmp = _head->_next;

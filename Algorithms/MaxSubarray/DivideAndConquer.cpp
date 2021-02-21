@@ -57,7 +57,10 @@ int FindMaxSubarray(std::vector<int>& arr, int low, int high)
     else
     {
         int mid = (low + high) / 2;
-        return Max3(FindMaxSubarray(arr, low, mid), FindMaxSubarray(arr, mid + 1, high),
-            FindMaxCrossingSubarray(arr, low, mid, high));
+        return Max3(
+            FindMaxSubarray(arr, low, mid),
+            FindMaxSubarray(arr, mid + 1, high),
+            FindMaxCrossingSubarray(arr, low, mid, high)
+        );
     }
 }
